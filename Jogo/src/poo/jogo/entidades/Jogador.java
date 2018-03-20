@@ -9,12 +9,10 @@ public class Jogador implements JogadorInterface {
 	private float Carteira;
 	private MaoInterface mao;
 
-	
 	public Jogador(String nome) {
 		this.nome = nome;
 	}
 	
-
 	public String getNome() {
 		return this.nome;
 	}
@@ -23,36 +21,20 @@ public class Jogador implements JogadorInterface {
 		return Carteira;
 	}
 
-	public void setCarteira(float carteira) {
-		Carteira = carteira;
+	public int pontos() {
+		return this.mao.getPonto();
+	}
+
+	public float fazerAposta() {
+		return 0;
 	}
 	
-	@Override
-	public int pontos() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float fazerAposta() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void solicitarCarta() {
-		// TODO Auto-generated method stub
-		
+		this.mao.receberCarta(c);
 	}
 
-	@Override
 	public void parar() {
-		// TODO Auto-generated method stub
 		
 	}
-
-
-
-
 
 }
