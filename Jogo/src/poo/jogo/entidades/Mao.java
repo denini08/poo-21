@@ -8,12 +8,12 @@ public class Mao implements MaoInterface{
 	private int ponto;
 	private ArrayList<CartaInterface> cartas = new ArrayList<CartaInterface>();
 
-	public void receberCarta(CartaInterface c){
+	public void receberCartas(CartaInterface c){
 		cartas.add(c);
 		pontos();
 	}
 
-	public int pontos(){
+	private int pontos(){
 	
 		for(int i=0 ; i < cartas.size(); i++){
 			this.ponto = this.cartas.get(i).getValor();
@@ -30,7 +30,8 @@ public class Mao implements MaoInterface{
 		return false;
 	}
 	
-	public int getPonto(){
+	public int getPontos(){
 		return this.ponto;
 	}
+
 }

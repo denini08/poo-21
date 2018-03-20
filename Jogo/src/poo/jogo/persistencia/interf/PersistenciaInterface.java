@@ -6,7 +6,7 @@ public interface PersistenciaInterface {
 	
 	public boolean inserirJogador(String nome, int saldo);
 	
-	public int saldoJogador(String nome);
+	public int saldoJogador(String nome) throws Exception;
 	
 	public ArrayList<String> listarJogadores();
 	

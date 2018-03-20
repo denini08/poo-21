@@ -1,5 +1,6 @@
 package poo.jogo.entidades;
 
+import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 import poo.jogo.entidades.interf.MaoInterface;
 
@@ -22,15 +23,15 @@ public class Jogador implements JogadorInterface {
 	}
 
 	public int pontos() {
-		return this.mao.getPonto();
+		return this.mao.getPontos();
 	}
 
 	public float fazerAposta() {
 		return 0;
 	}
 	
-	public void solicitarCarta() {
-		this.mao.receberCarta(c);
+	public void solicitarCarta(CartaInterface c) {
+		this.mao.receberCartas(c);
 	}
 
 	public void parar() {

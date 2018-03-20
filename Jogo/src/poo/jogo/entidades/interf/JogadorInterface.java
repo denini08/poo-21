@@ -8,7 +8,7 @@ public interface JogadorInterface {
 	
 	public float fazerAposta();
 	
-	public void  solicitarCarta();
+	public void  solicitarCarta(CartaInterface carta);
 	
 	public void parar();
 }

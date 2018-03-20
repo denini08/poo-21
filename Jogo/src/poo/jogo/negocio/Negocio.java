@@ -12,18 +12,23 @@ public class Negocio{
 		
 		PersistenciaInterface bd = new Persistencia();
 		
-		bd.inserirJogador("geovanne", 20);
+		bd.inserirJogador("caio", 20);
 		
-		int res = bd.saldoJogador("thiago");
-		System.out.println("SALDO é de : " + res);
-		
-		ArrayList<String> s = bd.listarJogadores();
-		
-		for(int i = 0; i < s.size(); i++) {
-			System.out.println(s.get(i));
+		try {
+			int res = bd.saldoJogador("josé");
+			System.out.println("SALDO é de : " + res);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		
-		bd.editarSaldo("geovanne", 15);
+		
+		//ArrayList<String> s = bd.listarJogadores();
+		
+		//for(int i = 0; i < s.size(); i++) {
+		//	System.out.println(s.get(i));
+		//}
+		
+		//bd.editarSaldo("geovanne", 15);
 		//bd.removerJogador("geovanne");
 		
 		
