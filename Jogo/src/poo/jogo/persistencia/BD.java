@@ -2,40 +2,67 @@ package poo.jogo.persistencia;
 
 import org.bson.Document;
 
-import com.mongodb.BasicDBObjectBuilder;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class BD {
+import poo.jogo.persistencia.interf.BDInterface;
 
-	public static void main(String[] args) {
+public class BD implements BDInterface {
+	
+	private static BD instancia;
+	private MongoClient mongoClient;
+	private MongoDatabase Bd;
+	private MongoCollection<Document> colJogador;
+	//private MongoCollection<Document> colBanca;
 		
-		
-		MongoClient mongoClient = new MongoClient();
-		System.out.println("Conexão com o MONGO feita!");
-		MongoDatabase DB = mongoClient.getDatabase("jogo21");
-		System.out.println("conexão com o BD feita!" + DB.getName());
-		
-		MongoCollection<Document> col = DB.getCollection("jogo");
-		
-		Document documento = new Document("nome","thomás").append("carteira", 1);
-		//col.insertOne(documento);
-
-		System.out.println("LER");
-		
-		FindIterable<Document> res = col.find();
-		
-		 for (Document document : res) {
-	            System.out.println(document.toJson());
-	        }
-
-   
-   
+	private BD() {
+		mongoClient = new MongoClient();
+		Bd = mongoClient.getDatabase("jogo21");
+		colJogador = Bd.getCollection("jogo");
 	}
+		
+	//SingleTon
+	public static BD getInstance() {
+		if(instancia == null) {
+			instancia = new BD();
+		}
+		return instancia;
+	}
+	
+	//funcoes
+	public void inserirJogador(Document doc) {
+		colJogador.insertOne(doc);
+	}
+	 
+	public FindIterable<Document> buscarJogador(Document doc){
+		return colJogador.find(doc);
+	}
+	
+	public FindIterable<Document> listarJogadores(){
+		return colJogador.find();
+	}
+	
+	public void deletarJogador(Document doc) {
+		colJogador.deleteOne(doc);
+	}
+	
+	public void editarJogador(Document docOld,Document docNew) {
+		colJogador.updateOne(docOld, new Document("$set", docNew));
+	}
+	
+	//Document documento = new Document("nome","thomás").append("carteira", 1);
+		
+		
+		//FindIterable<Document> res = col.find();
+		
+		 //for (Document document : res) {
+	      //      System.out.println(document.toJson());
+	       // }
+
+     
+	
 }
 
 
