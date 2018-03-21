@@ -22,5 +22,9 @@ public interface NegocioInterface {
 		
 		public void resultado();
 		
+		public int quantidadeJogadoresAtivos();
+		
+		public String getNome(int indice);
+		
 		
 }

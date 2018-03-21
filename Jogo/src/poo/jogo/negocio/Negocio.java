@@ -18,8 +18,6 @@ public class Negocio implements NegocioInterface{
 	PersistenciaInterface bd = null;
 	BancaInterface banca = null;
 	ArrayList<JogadorInterface> jogadores = null;
-	
-	//thomás
 	BaralhoInterface baralho = null;
 	
 	
@@ -27,9 +25,15 @@ public class Negocio implements NegocioInterface{
 		this.bd = new Persistencia();
 		this.banca = initBanca("BANCA");
 		this.jogadores = new ArrayList<JogadorInterface>();
-		this.baralho = new Baralho(4);
 	}
 
+	public int quantidadeJogadoresAtivos() {
+		return this.jogadores.size();
+	}
+	
+	public String getNome(int indice) {
+		return this.jogadores.get(indice).getNome();
+	}
 
 	private BancaInterface initBanca(String nomeBanca) throws Exception { //INICIALIZAÇÃO DA BANCA
 		BancaInterface banca;
@@ -91,30 +95,32 @@ public class Negocio implements NegocioInterface{
 		//CRIAR FOR PARA PRECORRER ARRAYLIST<JOGADORES...> RETIRANDO E TESTANDO SALDO DA APOSTA 
 		//PARA CONTA UNIVERSAL(VAR) E O QUE PENSAR MAIS
 		
+		
 	}
 
-	//thomás
 	@Override
 	public void embaralhar() {
 		// TODO Auto-generated method stub
 		this.baralho = new Baralho(4);
 	}
 
-	//thomás
 	@Override
 	public void distribuir() {
-		// TODO Auto-generated method stub
 		int i;
+		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
+		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
 		for (i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
 			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para o jogador
 			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para o jogador
 		}
-		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
-		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
 	}
 
 	@Override
 	public void jogar() {
+		boolean fim = false;
+		while (fim == false) {
+			
+		}
 		// TODO Auto-generated method stub
 		
 	}

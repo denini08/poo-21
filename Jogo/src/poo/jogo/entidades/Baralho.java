@@ -19,7 +19,7 @@ public class Baralho implements BaralhoInterface{
 	public Baralho(int quantidade){
 		int i,j,k;
 		Carta cartaTemp;
-		for (k = 0; k < quantidade; k++) {	//for da quantidade de jogos
+		for (k = 0; k < quantidade; k++) {	//for da quantidade de jogos(baralho)
 			for (j = 0; j < 4; j++) {	//for dos naipes do baralho
 				for (i = 0; i < 13; i++) {	//for das cartas do naipe
 					cartaTemp = new Carta(numeracao[i], naipes[j]);	//o objeto é criado
