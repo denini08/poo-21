@@ -4,6 +4,10 @@ public interface JogadorInterface {
 
 	public String getNome();
 	
+	public void setCarteira(float saldo);
+	
+	public float getCarteira();
+	
 	public int pontos();
 	
 	public float fazerAposta();

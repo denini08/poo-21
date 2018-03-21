@@ -21,8 +21,14 @@ public class Persistencia implements PersistenciaInterface {
 		bdInter = bd.getInstance();
 	}
 	
+	public boolean buscarJogador(String nome) { //BUSCA DE ELEMENTO NO BD
+		if(obterDocumento(nome).isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 	
-	public boolean inserirJogador(String nome, int saldo) {
+	public boolean inserirJogador(String nome, float saldo) { //INSERIR COM TESTE DE EXISTENCIA
 		
 		if(obterDocumento(nome).isEmpty()) {
 			Document doc = new Document("nome",nome).append("carteira", saldo);
@@ -32,7 +38,7 @@ public class Persistencia implements PersistenciaInterface {
 		return false;
 	}
 	
-	public int saldoJogador(String nome) throws Exception {
+	public int saldoJogador(String nome) throws Exception { //SALDO COM TESTE DE EXISTENCIA
 		Document doc = obterDocumento(nome);
 		if(doc.isEmpty()) {
 			throw new Exception("Erro ao Obter Saldo de " + nome);
@@ -41,7 +47,7 @@ public class Persistencia implements PersistenciaInterface {
 		return doc.getInteger("carteira");
 	}
 	
-	public ArrayList<String> listarJogadores() {
+	public ArrayList<String> listarJogadores() { //LISTAGEM DOS NOMES 
 		ArrayList<String> vetor = new ArrayList<String>();
 		FindIterable<Document> pesquisa = bdInter.listarJogadores();
 		if(pesquisa != null) {
@@ -52,23 +58,30 @@ public class Persistencia implements PersistenciaInterface {
 		return vetor;
 	}
 
-	public boolean removerJogador(String nome) {
-		Document doc = new Document("nome",nome);
-		bdInter.deletarJogador(doc);
-		if(bdInter.buscarJogador(doc) == null) {
-			return true;
-		}		
+	public boolean removerJogador(String nome) { //REMOVER PELO NOME COM TESTE DE EXISTENCIA
+		if(buscarJogador(nome)) {
+			Document doc = new Document("nome",nome);
+			bdInter.deletarJogador(doc);
+			if(bdInter.buscarJogador(doc) == null) {
+				return true;
+			}		
+		}
+		
 		return false;
 	}
 	
-	public void editarSaldo(String nome, int saldo) {
+	public void editarSaldo(String nome, float saldo) throws Exception { //EDITAR SALDO  COM TESTE DE EXISTENCIA
+		if(buscarJogador(nome)) {
+			Document docOld = new Document("nome",nome);
+			Document docNew = new Document("carteira", saldo);
+			bdInter.editarJogador(docOld, docNew);
+			throw new Exception("Saldo do jogador " + nome + "alterado com sucesso!");
+		}
 		
-		Document docOld = new Document("nome",nome);
-		Document docNew = new Document("carteira", saldo);
-		bdInter.editarJogador(docOld, docNew);
+		throw new Exception("Falha ao aterar saldo do jogador " + nome);
 	}
 	
-	private Document obterDocumento(String nome) {
+	private Document obterDocumento(String nome) { //METODO PARA CAPTURAR JSON
 		Document doc = new Document("nome",nome);
 		FindIterable<Document> pesquisa = bdInter.buscarJogador(doc);
 		Iterator<Document> iterator = pesquisa.iterator();

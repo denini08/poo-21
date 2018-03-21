@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public interface PersistenciaInterface {
 	
-	public boolean inserirJogador(String nome, int saldo);
+	public boolean buscarJogador(String nome);
+	
+	public boolean inserirJogador(String nome, float saldo);
 	
 	public int saldoJogador(String nome) throws Exception;
 	
@@ -12,5 +14,5 @@ public interface PersistenciaInterface {
 	
 	public boolean removerJogador(String nome);
 	
-	public void editarSaldo(String nome, int saldo);
+	public void editarSaldo(String nome, float saldo) throws Exception;
 }

@@ -10,8 +10,9 @@ public class Jogador implements JogadorInterface {
 	private float Carteira;
 	private MaoInterface mao;
 
-	public Jogador(String nome) {
+	public Jogador(String nome, float saldo) {
 		this.nome = nome;
+		this.Carteira = saldo;
 	}
 	
 	public String getNome() {
@@ -20,6 +21,10 @@ public class Jogador implements JogadorInterface {
 
 	public float getCarteira() {
 		return Carteira;
+	}
+	
+	public void setCarteira(float saldo) {    //Para somar apenas passar o valor 
+		this.Carteira = this.Carteira + saldo;//para subtrair bastar passar negativo
 	}
 
 	public int pontos() {
