@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(final String[] args) {
 		
-	
+		
 			/**
 			bd.inserirJogador("caio", 20);
 			

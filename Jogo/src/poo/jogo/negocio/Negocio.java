@@ -3,8 +3,11 @@ package poo.jogo.negocio;
 import java.util.ArrayList;
 
 import poo.jogo.entidades.Banca;
+import poo.jogo.entidades.Baralho;
 import poo.jogo.entidades.Jogador;
 import poo.jogo.entidades.interf.BancaInterface;
+import poo.jogo.entidades.interf.BaralhoInterface;
+import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 import poo.jogo.negocio.interf.NegocioInterface;
 import poo.jogo.persistencia.Persistencia;
@@ -16,11 +19,15 @@ public class Negocio implements NegocioInterface{
 	BancaInterface banca = null;
 	ArrayList<JogadorInterface> jogadores = null;
 	
+	//thomás
+	BaralhoInterface baralho = null;
+	
 	
 	public Negocio() throws Exception{
 		this.bd = new Persistencia();
 		this.banca = initBanca("BANCA");
 		this.jogadores = new ArrayList<JogadorInterface>();
+		this.baralho = new Baralho(4);
 	}
 
 
@@ -86,16 +93,24 @@ public class Negocio implements NegocioInterface{
 		
 	}
 
+	//thomás
 	@Override
 	public void embaralhar() {
 		// TODO Auto-generated method stub
-		
+		this.baralho = new Baralho(4);
 	}
 
+	//thomás
 	@Override
 	public void distribuir() {
 		// TODO Auto-generated method stub
-		
+		int i;
+		for (i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
+			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para o jogador
+			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para o jogador
+		}
+		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
+		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
 	}
 
 	@Override
