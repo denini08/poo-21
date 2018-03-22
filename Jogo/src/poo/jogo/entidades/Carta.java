@@ -10,9 +10,17 @@ public class Carta implements CartaInterface{
 	private NaipesEnum naipe;
 	
 	//Construtor: Nome da carta e o seu naipe, escrito de formar Maíuscula e sem acentos
-	Carta (String nome, String naipe){
-		this.nome = CartaEnum.valueOf(nome);
-		this.naipe = NaipesEnum.valueOf(naipe);
+	Carta (String nome, String naipe) throws Exception{
+		try{
+			this.nome = CartaEnum.valueOf(nome);
+		}catch (Exception e) {
+			throw new Exception("Nome da Carta Inválido");
+		}
+		try{
+			this.naipe = NaipesEnum.valueOf(naipe);
+		}catch (Exception e) {
+			throw new Exception("Naipe Incorreto");
+		}
 	}
 	
 	//Receber o valor da carta, já definido no Enum

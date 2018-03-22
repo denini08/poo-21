@@ -16,7 +16,8 @@ public class Baralho implements BaralhoInterface{
 	private ArrayList<Carta> cartas = new ArrayList<Carta>();
 	
 	//Construtor: Passar por parametro a quantidade de jogos que serão utilizados
-	public Baralho(int quantidade){
+	public Baralho(int quantidade) throws Exception{
+		if (quantidade <= 0) throw new Exception("É preciso que tenha pelo menos um baralho");
 		int i,j,k;
 		Carta cartaTemp;
 		for (k = 0; k < quantidade; k++) {	//for da quantidade de jogos(baralho)

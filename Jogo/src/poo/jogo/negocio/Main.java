@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import poo.jogo.negocio.interf.NegocioInterface;
 
+
 public class Main {
 
 	public static void main(final String[] args)  {
@@ -21,27 +22,9 @@ public class Main {
 				//scanf(scolha);
 			}
 			
-		}catch(Exception e) {
-			
-		}
+		}catch(Exception e) {}
 		
 		
+	}
 		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		}
-	
-
 }
