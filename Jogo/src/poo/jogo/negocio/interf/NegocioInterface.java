@@ -12,9 +12,9 @@ public interface NegocioInterface {
 		
 		public void depositarNaCarteira(String nome, float deposito) throws Exception;
 		
-		public void solicitarAposta(); 
+		public void solicitarAposta(int indice, float valor); 
 		
-		public void embaralhar();
+		public void embaralhar() throws Exception;
 		
 		public void distribuir();
 		

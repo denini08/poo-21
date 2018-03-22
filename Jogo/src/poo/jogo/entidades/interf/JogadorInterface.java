@@ -10,9 +10,9 @@ public interface JogadorInterface {
 	
 	public int pontos();
 	
-	public float fazerAposta();
+	public boolean fazerAposta(float valor);
 	
 	public void  solicitarCarta(CartaInterface carta);
 	
-	public void parar();
+	public float getValorDaAposta();
 }

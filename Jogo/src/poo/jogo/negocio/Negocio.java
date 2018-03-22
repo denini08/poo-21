@@ -15,10 +15,10 @@ import poo.jogo.persistencia.interf.PersistenciaInterface;
 
 public class Negocio implements NegocioInterface{
 	
-	PersistenciaInterface bd = null;
-	BancaInterface banca = null;
-	ArrayList<JogadorInterface> jogadores = null;
-	BaralhoInterface baralho = null;
+	private PersistenciaInterface bd = null;
+	private BancaInterface banca = null;
+	private ArrayList<JogadorInterface> jogadores = null;
+	private BaralhoInterface baralho = null;
 	
 	
 	public Negocio() throws Exception{
@@ -78,7 +78,7 @@ public class Negocio implements NegocioInterface{
 			throw new Exception("Jogador " + nome + "selecionado!");
 		}
 		
-		throw new Exception("Falha ao seelcionar o jogador " + nome);
+		throw new Exception("Falha ao selecionar o jogador " + nome);
 		
 	}
 	
@@ -91,15 +91,14 @@ public class Negocio implements NegocioInterface{
 	}
 	
 
-	public void solicitarAposta() {
-		//CRIAR FOR PARA PRECORRER ARRAYLIST<JOGADORES...> RETIRANDO E TESTANDO SALDO DA APOSTA 
-		//PARA CONTA UNIVERSAL(VAR) E O QUE PENSAR MAIS
+	public void solicitarAposta(int indice, float valor) {
+		this.jogadores.get(indice).fazerAposta(valor);
 		
 		
 	}
 
 	@Override
-	public void embaralhar() {
+	public void embaralhar() throws Exception {
 		// TODO Auto-generated method stub
 		this.baralho = new Baralho(4);
 	}
