@@ -1,5 +1,7 @@
 package poo.jogo.entidades.interf;
 
+import java.util.ArrayList;
+
 public interface JogadorInterface {
 
 	public String getNome();
@@ -15,4 +17,6 @@ public interface JogadorInterface {
 	public void  solicitarCarta(CartaInterface carta);
 	
 	public float getValorDaAposta();
+	
+	public ArrayList<CartaInterface> getMao();
 }

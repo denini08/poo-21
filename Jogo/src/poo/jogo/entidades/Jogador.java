@@ -1,5 +1,7 @@
 package poo.jogo.entidades;
 
+import java.util.ArrayList;
+
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 import poo.jogo.entidades.interf.MaoInterface;
@@ -46,6 +48,10 @@ public class Jogador implements JogadorInterface {
 	
 	public void solicitarCarta(CartaInterface c) {
 		this.mao.receberCartas(c);
+	}
+	
+	public ArrayList<CartaInterface> getMao(){
+		return this.mao.getCartas();
 	}
 
 

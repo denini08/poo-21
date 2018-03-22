@@ -33,5 +33,9 @@ public class Mao implements MaoInterface{
 	public int getPontos(){
 		return this.ponto;
 	}
+	
+	public ArrayList<CartaInterface> getCarta(){
+		return this.cartas;
+	}
 
 }

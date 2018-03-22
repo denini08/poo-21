@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="C:/Users/Geovanne/Documents/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="F:/Faculdade/poo-21/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="F:/Faculdade/poo-21/mongo-java-driver-3.6.3.jar"/>
+	<classpathentry kind="lib" path="F:/Faculdade/POO/poo-21/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="F:/Faculdade/POO/poo-21/mongo-java-driver-3.6.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

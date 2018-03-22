@@ -9,6 +9,7 @@ import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
+import poo.jogo.entidades.interf.MaoInterface;
 import poo.jogo.negocio.interf.NegocioInterface;
 import poo.jogo.persistencia.Persistencia;
 import poo.jogo.persistencia.interf.PersistenciaInterface;
@@ -25,6 +26,7 @@ public class Negocio implements NegocioInterface{
 		this.bd = new Persistencia();
 		this.banca = initBanca("BANCA");
 		this.jogadores = new ArrayList<JogadorInterface>();
+		this.baralho = new Baralho(4);
 	}
 
 	public int quantidadeJogadoresAtivos() {
@@ -93,13 +95,10 @@ public class Negocio implements NegocioInterface{
 
 	public void solicitarAposta(int indice, float valor) {
 		this.jogadores.get(indice).fazerAposta(valor);
-		
-		
 	}
 
 	@Override
 	public void embaralhar() throws Exception {
-		// TODO Auto-generated method stub
 		this.baralho = new Baralho(4);
 	}
 
@@ -128,6 +127,18 @@ public class Negocio implements NegocioInterface{
 	public void resultado() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public ArrayList<CartaInterface> getBancaMao() {
+		return this.banca.getMao();
+	}
+	
+	public ArrayList<CartaInterface> getJogadorMao(int indice) {
+		return this.jogadores.get(indice).getMao();
+	}
+	
+	public void pegaCarta(int indiceJogador) {
+		jogadores.get(indiceJogador).solicitarCarta(this.baralho.retirarCarta());
 	}
 
 

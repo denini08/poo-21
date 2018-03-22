@@ -1,6 +1,9 @@
 package poo.jogo.entidades.interf;
 
+import java.util.ArrayList;
+
 import poo.jogo.entidades.Carta;
+import poo.jogo.entidades.interf.CartaInterface;
 
 public interface MaoInterface {
 
@@ -10,4 +13,6 @@ public interface MaoInterface {
 	
 	public int pontos();
 	public int getPonto();
+	
+	public ArrayList<CartaInterface> getCartas();
 }
