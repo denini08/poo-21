@@ -41,7 +41,7 @@ public class Main {
 					nome = scan.nextLine();
 					System.out.println("Digite o valor de crédito que "+nome+" possui");
 					scan.hasNext();
-					carteira = scan.nextFloat();
+					carteira = Float.parseFloat(scan.nextLine());
 					try {
 						n.adicionarJogador(nome, carteira);
 						System.out.println("O jogador "+nome+" foi adicionado com sucesso com o saldo de "+carteira);
@@ -52,15 +52,24 @@ public class Main {
 				else
 					System.out.println("Opção não aceita, por favor digite novamente");
 			}
-			scan.close();
+			//scan.close();
 			ArrayList<String> a = n.listarNomeDosjogadores();
+			
 			//LISTAGEM
 			System.out.println("Jogadores já Cadastrados!");
 			for(int i=0; i < a.size(); i++) System.out.println(a.get(i));
-			scan = new Scanner(System.in);
-			System.out.println("Informe a quantidade de jogadores:");
-			scan.hasNext();
-			quant = scan.nextInt();
+			//scan = new Scanner(System.in);
+			while(true) {
+				System.out.println("Informe a quantidade de jogadores:");	
+				try {
+					scan.hasNext();
+					quant = Integer.parseInt(scan.nextLine());
+					break;
+				}catch(Exception e) {
+					System.out.println("Você não digitou um número inteiro!");
+				}
+			}
+			
 			for (int i = 0; i < quant; i++) {
 				scan = new Scanner(System.in);
 				System.out.println("Informe o nome do jogador "+(i+1)+":");
@@ -73,17 +82,17 @@ public class Main {
 					System.out.println(e.getMessage());
 				}
 			}
-			scan.close();
+			//scan.close();
 
 			//APOSTA
 			for (int i = 0; i < n.quantidadeJogadoresAtivos(); i++) {
-				scan = new Scanner(System.in);
+				//scan = new Scanner(System.in);
 				System.out.println("Jogador " + n.getNome(i) + " digite o valor da sua aposta");
 				scan.hasNext();
 				valor = scan.nextFloat();
 				n.solicitarAposta(i,  valor);
 			}
-			scan.close();
+			//scan.close();
 			
 			//DISTRIBUIR
 			System.out.println("Distribuindo cartas");
@@ -126,11 +135,17 @@ public class Main {
 			
 			
 			//FIM DO JOGO
-			n.resultado();
+			try{
+				
+				System.out.println(n.resultado());
+				
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
 			
 			
 		}catch(Exception e) {}
-		
+		System.err.println("erro inesperado");
 	}
 		
 }

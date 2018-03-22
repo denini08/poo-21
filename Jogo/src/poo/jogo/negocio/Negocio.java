@@ -102,9 +102,10 @@ public class Negocio implements NegocioInterface{
 		this.baralho = new Baralho(4);
 	}
 
-	@Override
+
 	public void distribuir() {
 		int i;
+		System.out.println("EUUU");
 		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
 		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
 		for (i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
@@ -113,21 +114,7 @@ public class Negocio implements NegocioInterface{
 		}
 	}
 
-	@Override
-	public void jogar() {
-		boolean fim = false;
-		while (fim == false) {
-			
-		}
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void resultado() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public ArrayList<CartaInterface> getBancaMao() {
 		return this.banca.getMao();
@@ -142,6 +129,37 @@ public class Negocio implements NegocioInterface{
 	}
 
 
+	
+	public String resultado() throws Exception {
+		//PEGAR CASH DA BANCA - FALAR COM OS PARÇAS
+		String res = "";
+		int pontosDaBanca = this.banca.pontos();
+		res += "Pontuação da Banca: " + pontosDaBanca + "\n";
+		
+		for(int i = 0 ; i < quantidadeJogadoresAtivos(); i++) {
+			int pontosDoJogador =  this.jogadores.get(i).pontos();
+			if(pontosDoJogador > pontosDaBanca) {
+				
+				float deposito = (float) (this.jogadores.get(i).getValorDaAposta() * 2.5);
+				depositarNaCarteira(this.jogadores.get(i).getNome(), deposito);
+				res += "Jogador " + this.jogadores.get(i).getNome() + " Ganhou!";
+				
+			}else if(pontosDoJogador < pontosDaBanca) {
+				
+				float saque = (float) (this.jogadores.get(i).getValorDaAposta());
+				depositarNaCarteira(this.jogadores.get(i).getNome(), -saque);
+				res += "Jogador " + this.jogadores.get(i).getNome() + " Perdeu!";
+				
+				
+			}else {
+				
+				res += "Jogador " + this.jogadores.get(i).getNome() + " Empatou!";				
+				
+			}
+		}
+		
+		return res;
+	}
 
 
 

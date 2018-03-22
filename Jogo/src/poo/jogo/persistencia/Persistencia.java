@@ -38,13 +38,13 @@ public class Persistencia implements PersistenciaInterface {
 		return false;
 	}
 	
-	public int saldoJogador(String nome) throws Exception { //SALDO COM TESTE DE EXISTENCIA
+	public float saldoJogador(String nome) throws Exception { //SALDO COM TESTE DE EXISTENCIA
 		Document doc = obterDocumento(nome);
 		if(doc.isEmpty()) {
 			throw new Exception("Erro ao Obter Saldo de " + nome);
 		}
 		
-		return doc.getInteger("carteira");
+		return doc.getDouble("carteira").floatValue();
 	}
 	
 	public ArrayList<String> listarJogadores() { //LISTAGEM DOS NOMES 
@@ -75,7 +75,7 @@ public class Persistencia implements PersistenciaInterface {
 			Document docOld = new Document("nome",nome);
 			Document docNew = new Document("carteira", saldo);
 			bdInter.editarJogador(docOld, docNew);
-			throw new Exception("Saldo do jogador " + nome + "alterado com sucesso!");
+			return;
 		}
 		
 		throw new Exception("Falha ao aterar saldo do jogador " + nome);

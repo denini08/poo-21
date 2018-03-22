@@ -20,10 +20,8 @@ public interface NegocioInterface {
 		public void embaralhar() throws Exception;
 		
 		public void distribuir();
-		
-		public void jogar();
-		
-		public void resultado();
+				
+		public String resultado() throws Exception;
 		
 		public int quantidadeJogadoresAtivos();
 		
