@@ -18,5 +18,7 @@ public interface JogadorInterface {
 	
 	public float getValorDaAposta();
 	
-	public ArrayList<CartaInterface> getMao();
+	public ArrayList<CartaInterface> getCartasDaMao();
+	
+	public MaoInterface getMao();
 }

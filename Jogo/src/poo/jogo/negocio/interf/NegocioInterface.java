@@ -2,7 +2,6 @@ package poo.jogo.negocio.interf;
 
 import java.util.ArrayList;
 
-import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 
 public interface NegocioInterface {
@@ -31,7 +30,12 @@ public interface NegocioInterface {
 		
 		public ArrayList<CartaInterface> getJogadorMao(int indice);
 		
-		public void pegaCarta(int indiceJogador);
+		public void pegaCarta(int indiceJogador) throws Exception;
+		
+		public int getPontosJogadorAtivo(int indice);
+		
+		//public void IaDaBanca();
+		
 		
 		
 }

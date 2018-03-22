@@ -11,4 +11,6 @@ public interface MaoInterface {
 	public int getPontos();
 	
 	public ArrayList<CartaInterface> getCartas();
+	
+	
 }

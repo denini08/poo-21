@@ -11,7 +11,6 @@ public class Main {
 
 	public static void main(final String[] args)  {
 		
-		
 		NegocioInterface n;
 		Scanner scan = null;
 		int quant;
@@ -24,8 +23,8 @@ public class Main {
 		
 		try {
 			scan = new Scanner(System.in);
-			System.out.println("------Blackjack UPE Caruaru------");
 			n = new Negocio();
+			System.out.println("------Blackjack UPE Caruaru------");
 			continua = false;	//condição para parar o loop
 			while (continua == false) {
 				scan = new Scanner(System.in);
@@ -80,6 +79,7 @@ public class Main {
 					System.out.println("Jogador "+nome+" entrou");
 				}catch( Exception e) {
 					System.out.println(e.getMessage());
+					i--;
 				}
 			}
 			//scan.close();
@@ -97,14 +97,15 @@ public class Main {
 			//DISTRIBUIR
 			System.out.println("Distribuindo cartas");
 			n.distribuir();
-			System.out.println("A banca possui:");
 			maoJogadores = n.getBancaMao();
 			System.out.println("A banca possui: "+maoJogadores.get(0).getNome()+" de "+maoJogadores.get(0).getNaipe());
+			//System.out.println("A banca possui: "+maoJogadores.get(1).getNome()+" de "+maoJogadores.get(1).getNaipe());
 			for (int i = 0; i < n.quantidadeJogadoresAtivos(); i++) {
 				maoJogadores = n.getJogadorMao(i);
 				System.out.println(n.getNome(i)+" possui:");
 				System.out.println(maoJogadores.get(0).getNome()+" de "+maoJogadores.get(0).getNaipe());
 				System.out.println(maoJogadores.get(1).getNome()+" de "+maoJogadores.get(1).getNaipe());
+				System.out.println("Pontos: "+n.getPontosJogadorAtivo(i)  + "\n");
 			}
 			
 			
@@ -112,25 +113,38 @@ public class Main {
 			
 			//JOGAR
 			for (int i = 0; i < n.quantidadeJogadoresAtivos(); i++) {
-				continua = false;
 				do  {
 					scan = new Scanner(System.in);
-					System.out.println("jogador "+n.getNome(i)+", pega ou passa?");
+					System.out.println("jogador "+n.getNome(i)+", pega ou para?");
 					scan.hasNext();
 					escolha = scan.nextLine();
 					if (escolha.equals("pega")) {
-						n.pegaCarta(i);
-						continua = true;
+						try{
+							n.pegaCarta(i);
+						}catch (Exception e){
+							System.err.println(e.getMessage());
+							break;
+						}finally {
+							maoJogadores = n.getJogadorMao(i);
+							System.out.println(n.getNome(i)+" recebeu:");
+							for (int j = 0; j < maoJogadores.size(); j++) {
+								System.out.println(maoJogadores.get(j).getNome()+" de "+maoJogadores.get(j).getNaipe());
+							}
+							System.out.println("Pontos: "+n.getPontosJogadorAtivo(i) + "\n");
+						}
+						
 					}
-					else if (escolha.equals("passa")) {
-						continue;
+					else if (escolha.equals("para")) {
+						break;
 					}
 					else {
 						System.out.println("Escolha incorreta, por favor escolha novamente");
-						continua = false;
 					}
-				}while (continua == false);
+				}while (true);
 			}
+			//IA DA BANCA
+			
+			
 			
 			
 			
@@ -144,8 +158,8 @@ public class Main {
 			}
 			
 			
-		}catch(Exception e) {}
-		System.err.println("erro inesperado");
+		}catch(Exception e) {
+		System.err.println(e.getMessage());
+		}
 	}
-		
 }

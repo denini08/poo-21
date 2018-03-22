@@ -9,7 +9,6 @@ import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
-import poo.jogo.entidades.interf.MaoInterface;
 import poo.jogo.negocio.interf.NegocioInterface;
 import poo.jogo.persistencia.Persistencia;
 import poo.jogo.persistencia.interf.PersistenciaInterface;
@@ -77,7 +76,7 @@ public class Negocio implements NegocioInterface{
 	public void selecionarJogadores(String nome) throws Exception { //SELEÇÃO PELO NOME
 		if(this.bd.buscarJogador(nome)) {
 			this.jogadores.add(new Jogador(nome, bd.saldoJogador(nome)));
-			throw new Exception("Jogador " + nome + "selecionado!");
+			return;
 		}
 		
 		throw new Exception("Falha ao selecionar o jogador " + nome);
@@ -105,27 +104,30 @@ public class Negocio implements NegocioInterface{
 
 	public void distribuir() {
 		int i;
-		System.out.println("EUUU");
-		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
-		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
 		for (i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
 			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para o jogador
 			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para o jogador
 		}
+		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
+		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
 	}
 
 
 	
 	public ArrayList<CartaInterface> getBancaMao() {
-		return this.banca.getMao();
+		return this.banca.getCartasDaMao();
 	}
 	
 	public ArrayList<CartaInterface> getJogadorMao(int indice) {
-		return this.jogadores.get(indice).getMao();
+		return this.jogadores.get(indice).getCartasDaMao();
 	}
 	
-	public void pegaCarta(int indiceJogador) {
-		jogadores.get(indiceJogador).solicitarCarta(this.baralho.retirarCarta());
+	public void pegaCarta(int indiceJogador) throws Exception {
+		this.jogadores.get(indiceJogador).solicitarCarta(this.baralho.retirarCarta());
+		if(!this.jogadores.get(indiceJogador).getMao().estourar()) {
+			return;
+		}
+		 throw new Exception("Jogador Estorou!");
 	}
 
 
@@ -138,28 +140,46 @@ public class Negocio implements NegocioInterface{
 		
 		for(int i = 0 ; i < quantidadeJogadoresAtivos(); i++) {
 			int pontosDoJogador =  this.jogadores.get(i).pontos();
-			if(pontosDoJogador > pontosDaBanca) {
+			res += "Jogador " +  this.jogadores.get(i).getNome() + ",sua Pontuação é de : " + pontosDoJogador; ;
+			if(this.jogadores.get(i).getMao().estourar()) {
+				
+				float saque = (float) (this.jogadores.get(i).getValorDaAposta());
+				depositarNaCarteira(this.jogadores.get(i).getNome(), -saque);
+				res += " Perdeu!\n";
+				
+			}else if(pontosDoJogador > pontosDaBanca) {
 				
 				float deposito = (float) (this.jogadores.get(i).getValorDaAposta() * 2.5);
 				depositarNaCarteira(this.jogadores.get(i).getNome(), deposito);
-				res += "Jogador " + this.jogadores.get(i).getNome() + " Ganhou!";
+				res += " Ganhou!\n";
 				
 			}else if(pontosDoJogador < pontosDaBanca) {
 				
 				float saque = (float) (this.jogadores.get(i).getValorDaAposta());
 				depositarNaCarteira(this.jogadores.get(i).getNome(), -saque);
-				res += "Jogador " + this.jogadores.get(i).getNome() + " Perdeu!";
+				res += " Perdeu!\n";
 				
 				
 			}else {
 				
-				res += "Jogador " + this.jogadores.get(i).getNome() + " Empatou!";				
+				res += " Empatou!\n";				
 				
 			}
 		}
 		
 		return res;
 	}
+	
+	public int getPontosJogadorAtivo(int indice) {
+		return this.jogadores.get(indice).getMao().getPontos();
+	}
+
+	
+/*	public void IaDaBanca() {
+		int maiorPontuacao;
+		for(int i = 0; )
+		
+	}*/
 
 
 

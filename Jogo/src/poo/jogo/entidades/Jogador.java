@@ -11,11 +11,12 @@ public class Jogador implements JogadorInterface {
 	private String nome;
 	private float Carteira;
 	private float valorDaAposta;
-	private MaoInterface mao;
+	private MaoInterface mao ;
 
 	public Jogador(String nome, float saldo) {
 		this.nome = nome;
 		this.Carteira = saldo;
+		this.mao = new Mao();
 	}
 	
 	public String getNome() {
@@ -50,9 +51,12 @@ public class Jogador implements JogadorInterface {
 		this.mao.receberCartas(c);
 	}
 	
-	public ArrayList<CartaInterface> getMao(){
+	public ArrayList<CartaInterface> getCartasDaMao(){
 		return this.mao.getCartas();
 	}
 
+	public MaoInterface getMao() {
+		return this.mao;
+	}
 
 }
