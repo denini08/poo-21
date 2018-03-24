@@ -25,20 +25,20 @@ public class Main {
 			scan = new Scanner(System.in);
 			n = new Negocio();
 			System.out.println("------Blackjack UPE Caruaru------");
-			continua = false;	//condiÁ„o para parar o loop
+			continua = false;	//condi√ß√£o para parar o loop
 			while (continua == false) {
 				scan = new Scanner(System.in);
 				System.out.println("Deseja adicionar algum jogador? [sim/nao]");
 				scan.hasNext();
 				escolha = scan.nextLine();
-				if (escolha.equals("nao")){	//caso escolha n„o, ent„o sai do loop
+				if (escolha.equals("nao") || escolha.equals("n")){	//caso escolha n√£o, ent√£o sai do loop
 					continua = true;
 				}
-				else if (escolha.equals("sim")) {//caso escolha sim, ent„o vai digitar os dados
+				else if (escolha.equals("sim") || escolha.equals("s") ) {//caso escolha sim, ent√£o vai digitar os dados
 					System.out.println("Digite o nome do Jogador que vai adicionar");
 					scan.hasNext();
 					nome = scan.nextLine();
-					System.out.println("Digite o valor de crÈdito que "+nome+" possui");
+					System.out.println("Digite o valor de cr√©dito que "+nome+" possui");
 					scan.hasNext();
 					carteira = Float.parseFloat(scan.nextLine());
 					try {
@@ -49,13 +49,13 @@ public class Main {
 					}
 				}
 				else
-					System.out.println("OpÁ„o n„o aceita, por favor digite novamente");
+					System.out.println("Op√ß√£o n√£o aceita, por favor digite novamente");
 			}
 			//scan.close();
 			ArrayList<String> a = n.listarNomeDosjogadores();
 			
 			//LISTAGEM
-			System.out.println("Jogadores j· Cadastrados!");
+			System.out.println("Jogadores j√° Cadastrados!");
 			for(int i=0; i < a.size(); i++) System.out.println(a.get(i));
 			//scan = new Scanner(System.in);
 			while(true) {
@@ -63,9 +63,13 @@ public class Main {
 				try {
 					scan.hasNext();
 					quant = Integer.parseInt(scan.nextLine());
-					break;
+					if(quant >= 1 &&  quant <= 7){
+						break;
+					} else {
+						System.out.println("Quantidade max permitida √© 7 e a minima √© 1"); //condicao de erro
+					} 
 				}catch(Exception e) {
-					System.out.println("VocÍ n„o digitou um n˙mero inteiro!");
+					System.out.println("Voc√™ n√£o digitou um n√∫mero inteiro!");
 				}
 			}
 			
