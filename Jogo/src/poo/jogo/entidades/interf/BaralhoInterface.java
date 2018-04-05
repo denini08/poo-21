@@ -4,5 +4,6 @@ public interface BaralhoInterface {
 	
 	public CartaInterface retirarCarta();	//método para puxar a carta
 	public int getQuantidadeCartas();	//saber quantas cartas há no baralho
+	public void embaralhar();	//embarlhar o baralho
 	
 }

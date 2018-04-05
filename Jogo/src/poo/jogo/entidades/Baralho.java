@@ -28,7 +28,7 @@ public class Baralho implements BaralhoInterface{
 				}
 			}
 		}
-		this.embaralhar(quantidade);	//por fim o baralho é embaralhado
+		this.embaralhar();	//por fim o baralho é embaralhado
 	}
 	
 	//puxar uma carta do baralho
@@ -42,10 +42,11 @@ public class Baralho implements BaralhoInterface{
 	}
 	
 	
-	private void embaralhar(int quantidade) {
+	public void embaralhar() {
+		int tamanho = this.cartas.size();
 		Random gerador = new Random();	//gerador de números randomico
 		ArrayList<Carta> baralhoTemp = new ArrayList<Carta>();	//array temporario para armazenar as cartas embaralhadas
-		for (int i = 0; i < 52 * quantidade; i++) {
+		for (int i = 0; i < tamanho; i++) {
 			int index = gerador.nextInt(cartas.size());	//gera o indice da carta que será puxada, número máximo é o limite de cartas no baralho
 			baralhoTemp.add(cartas.remove(index));	//é adicionado no array temporário
 		}

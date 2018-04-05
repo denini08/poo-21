@@ -3,10 +3,8 @@ package poo.jogo.negocio;
 import java.util.ArrayList;
 
 import poo.jogo.entidades.Banca;
-import poo.jogo.entidades.Baralho;
 import poo.jogo.entidades.Jogador;
 import poo.jogo.entidades.interf.BancaInterface;
-import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 import poo.jogo.negocio.interf.NegocioInterface;
@@ -18,14 +16,12 @@ public class Negocio implements NegocioInterface{
 	private PersistenciaInterface bd = null;
 	private BancaInterface banca = null;
 	private ArrayList<JogadorInterface> jogadores = null;
-	private BaralhoInterface baralho = null;
 	
 	
 	public Negocio() throws Exception{
 		this.bd = new Persistencia();
 		this.banca = initBanca("BANCA");
 		this.jogadores = new ArrayList<JogadorInterface>();
-		this.baralho = new Baralho(4);
 	}
 
 	public int quantidadeJogadoresAtivos() {
@@ -98,18 +94,18 @@ public class Negocio implements NegocioInterface{
 
 	@Override
 	public void embaralhar() throws Exception {
-		this.baralho = new Baralho(4);
+		this.banca.embaralhar();
 	}
 
 
 	public void distribuir() {
 		int i;
 		for (i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
-			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para o jogador
-			jogadores.get(i).solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para o jogador
+			jogadores.get(i).solicitarCarta( this.banca.retirarCarta() );	//puxa a 1ª carta para o jogador
+			jogadores.get(i).solicitarCarta( this.banca.retirarCarta() );	//puxa a 2ª carta para o jogador
 		}
-		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 1ª carta para a banca
-		banca.solicitarCarta( this.baralho.retirarCarta() );	//puxa a 2ª carta para a banca
+		banca.solicitarCarta( this.banca.retirarCarta() );	//puxa a 1ª carta para a banca
+		banca.solicitarCarta( this.banca.retirarCarta() );	//puxa a 2ª carta para a banca
 	}
 
 
@@ -123,7 +119,7 @@ public class Negocio implements NegocioInterface{
 	}
 	
 	public void pegaCarta(int indiceJogador) throws Exception {
-		this.jogadores.get(indiceJogador).solicitarCarta(this.baralho.retirarCarta());
+		this.jogadores.get(indiceJogador).solicitarCarta(this.banca.retirarCarta());
 		if(!this.jogadores.get(indiceJogador).getMao().estourar()) {
 			return;
 		}

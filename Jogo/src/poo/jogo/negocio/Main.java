@@ -14,7 +14,6 @@ public class Main {
 		NegocioInterface n;
 		Scanner scan = null;
 		int quant;
-		boolean continua;
 		String nome;
 		String escolha;
 		float carteira;
@@ -25,14 +24,13 @@ public class Main {
 			scan = new Scanner(System.in);
 			n = new Negocio();
 			System.out.println("------Blackjack UPE Caruaru------");
-			continua = false;	//condição para parar o loop
-			while (continua == false) {
+			while (true) {
 				scan = new Scanner(System.in);
 				System.out.println("Deseja adicionar algum jogador? [sim/nao]");
 				scan.hasNext();
 				escolha = scan.nextLine();
 				if (escolha.equals("nao") || escolha.equals("n")){	//caso escolha não, então sai do loop
-					continua = true;
+					break;
 				}
 				else if (escolha.equals("sim") || escolha.equals("s") ) {//caso escolha sim, então vai digitar os dados
 					System.out.println("Digite o nome do Jogador que vai adicionar");
@@ -103,7 +101,6 @@ public class Main {
 			n.distribuir();
 			maoJogadores = n.getBancaMao();
 			System.out.println("A banca possui: "+maoJogadores.get(0).getNome()+" de "+maoJogadores.get(0).getNaipe());
-			//System.out.println("A banca possui: "+maoJogadores.get(1).getNome()+" de "+maoJogadores.get(1).getNaipe());
 			for (int i = 0; i < n.quantidadeJogadoresAtivos(); i++) {
 				maoJogadores = n.getJogadorMao(i);
 				System.out.println(n.getNome(i)+" possui:");

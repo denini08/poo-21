@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/08945641459/Downloads/poo-21-master/json-simple-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/08945641459/Downloads/poo-21-master/mongo-java-driver-3.6.3.jar"/>
+	<classpathentry kind="lib" path="F:/Faculdade/POO/poo-21/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="F:/Faculdade/POO/poo-21/mongo-java-driver-3.6.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
