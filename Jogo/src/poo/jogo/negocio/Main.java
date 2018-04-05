@@ -186,7 +186,7 @@ public class Main {
 				System.out.println(e.getMessage());
 			}
 			
-			n.fecharBanco();
+			//n.fecharBanco();
 			
 		}catch(Exception e) {
 		System.err.println(e.getMessage());
