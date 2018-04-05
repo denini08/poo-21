@@ -19,8 +19,8 @@ public class BD implements BDInterface {
 	//private MongoCollection<Document> colBanca;
 		
 	private BD() {
-		//MongoClientURI uri = new MongoClientURI("mongodb://user:pass@host:port/db");
-		mongoClient = new MongoClient();
+		MongoClientURI uri = new MongoClientURI("mongodb://user:pass@host:port/db");
+		mongoClient = new MongoClient(uri);
 		Bd = mongoClient.getDatabase("jogo21");
 		colJogador = Bd.getCollection("jogo");
 	}
