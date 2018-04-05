@@ -36,7 +36,7 @@ public class Main {
 					System.out.println("Digite o nome do Jogador que vai adicionar");
 					scan.hasNext();
 					nome = scan.nextLine();
-					System.out.println("Digite o valor de crÃ©dito que "+nome+" possui");
+					System.out.println("Digite o valor de crédito que "+nome+" possui");
 					scan.hasNext();
 					carteira = Float.parseFloat(scan.nextLine());
 					try {
@@ -144,6 +144,34 @@ public class Main {
 				}while (true);
 			}
 			//IA DA BANCA
+			maoJogadores = n.getBancaMao();
+			System.out.println("Vez da Banca");
+			System.out.println("Banca Possui:");
+			System.out.println(maoJogadores.get(0).getNome()+" de "+maoJogadores.get(0).getNaipe());
+			System.out.println(maoJogadores.get(1).getNome()+" de "+maoJogadores.get(1).getNaipe());
+			
+			while(true) {
+				if (n.IaDaBanca() == true) {
+					System.out.println("Banca puxa!");
+					try{
+						n.pegaCarta(-1);	//-1 É O ID DA BANCA
+						
+					}catch (Exception e) {
+						System.err.println(e.getMessage());
+						break;
+					}finally {
+						maoJogadores = n.getBancaMao();
+						System.out.println("Banca recebeu:");
+						for (int i = 0; i < maoJogadores.size(); i++) {
+							System.out.println(maoJogadores.get(i).getNome()+" de "+maoJogadores.get(i).getNaipe());
+						}
+						System.out.println("Pontos: "+n.getPontosJogadorAtivo(-1)+"\n");
+					}
+				}else {
+					System.out.println("Banca Parou");
+					break;
+				}
+			}
 			
 			
 			
@@ -158,6 +186,7 @@ public class Main {
 				System.out.println(e.getMessage());
 			}
 			
+			n.fecharBanco();
 			
 		}catch(Exception e) {
 		System.err.println(e.getMessage());

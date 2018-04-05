@@ -34,8 +34,8 @@ public interface NegocioInterface {
 		
 		public int getPontosJogadorAtivo(int indice);
 		
-		//public void IaDaBanca();
+		public boolean IaDaBanca();
 		
-		
+		public void fecharBanco();
 		
 }

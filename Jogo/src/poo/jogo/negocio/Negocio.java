@@ -55,7 +55,7 @@ public class Negocio implements NegocioInterface{
 	
 	public void adicionarJogador(String nome, float saldo) throws Exception { 
 		if(bd.inserirJogador(nome, saldo)) {
-			throw new Exception("Jogador " + nome + "Adicionado com sucesso!");
+			return;
 		}
 		
 		throw new Exception("Falha ao adicionar o jogador " + nome);
@@ -119,11 +119,15 @@ public class Negocio implements NegocioInterface{
 	}
 	
 	public void pegaCarta(int indiceJogador) throws Exception {
+		if (indiceJogador ==  -1) {
+			this.banca.solicitarCarta(this.banca.retirarCarta());
+			return;
+		}
 		this.jogadores.get(indiceJogador).solicitarCarta(this.banca.retirarCarta());
 		if(!this.jogadores.get(indiceJogador).getMao().estourar()) {
 			return;
 		}
-		 throw new Exception("Jogador Estorou!");
+		 throw new Exception("Jogador Estorou!\n");
 	}
 
 
@@ -143,6 +147,10 @@ public class Negocio implements NegocioInterface{
 				depositarNaCarteira(this.jogadores.get(i).getNome(), -saque);
 				res += " Perdeu!\n";
 				
+			}else if(this.banca.estorou()) {
+				float deposito = (float) (this.jogadores.get(i).getValorDaAposta() * 2.5);
+				depositarNaCarteira(this.jogadores.get(i).getNome(), deposito);
+				res += " Ganhou!\n";
 			}else if(pontosDoJogador > pontosDaBanca) {
 				
 				float deposito = (float) (this.jogadores.get(i).getValorDaAposta() * 2.5);
@@ -167,18 +175,42 @@ public class Negocio implements NegocioInterface{
 	}
 	
 	public int getPontosJogadorAtivo(int indice) {
+		if (indice == -1) {
+			return this.banca.pontos();
+		}
 		return this.jogadores.get(indice).getMao().getPontos();
 	}
 
 	
-/*	public void IaDaBanca() {
-		int maiorPontuacao;
-		for(int i = 0; )
+	public boolean IaDaBanca() {
+		int deQuantosEstouGanhando = 0;
+		boolean res;
+		for (int i = 0; i < this.quantidadeJogadoresAtivos(); i++) {	//CHECAR SE TODOS ESTOURARAM
+			if (!this.jogadores.get(i).estorou()) {
+				if (this.banca.pontos() > this.jogadores.get(i).pontos()) {
+					deQuantosEstouGanhando++;
+				}
+			}else {
+				deQuantosEstouGanhando++;
+			}
+		}
+		if(deQuantosEstouGanhando == this.quantidadeJogadoresAtivos()){
+			res = false;
 		
-	}*/
+		}else if (deQuantosEstouGanhando == 0){
+			res = true;
+		}else if (this.banca.pontos() < 17) {
+			res = true;
+			
+		}else {
+			res = false;
+		}
+		return res;
+	}
 
-
-
+	public void fecharBanco () {
+		this.bd.fecharBanco();
+	}
 
 	
 	

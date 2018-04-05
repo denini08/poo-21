@@ -15,4 +15,6 @@ public interface PersistenciaInterface {
 	public boolean removerJogador(String nome);
 	
 	public void editarSaldo(String nome, float saldo) throws Exception;
+	
+	public void fecharBanco();
 }

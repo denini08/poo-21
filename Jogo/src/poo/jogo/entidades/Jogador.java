@@ -58,5 +58,9 @@ public class Jogador implements JogadorInterface {
 	public MaoInterface getMao() {
 		return this.mao;
 	}
+	
+	public boolean estorou() {
+		return this.mao.estourar();
+	}
 
 }

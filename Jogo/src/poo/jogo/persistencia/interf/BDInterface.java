@@ -15,5 +15,7 @@ public interface BDInterface {
 	public void deletarJogador(Document doc);
 	
 	public void editarJogador(Document docOld, Document docNew);
+	
+	public void fechar();
 
 }

@@ -89,4 +89,7 @@ public class Persistencia implements PersistenciaInterface {
 		return (iterator.hasNext()) ? (doc = (Document) iterator.next()) : (doc = new Document());
 	}
 
+	public void fecharBanco() {
+		this.bd.fechar();
+	}
 }

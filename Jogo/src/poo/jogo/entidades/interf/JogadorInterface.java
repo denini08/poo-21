@@ -21,4 +21,6 @@ public interface JogadorInterface {
 	public ArrayList<CartaInterface> getCartasDaMao();
 	
 	public MaoInterface getMao();
+	
+	public boolean estorou();
 }

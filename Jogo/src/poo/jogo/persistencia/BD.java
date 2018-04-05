@@ -2,6 +2,7 @@ package poo.jogo.persistencia;
 
 import org.bson.Document;
 
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -18,6 +19,7 @@ public class BD implements BDInterface {
 	//private MongoCollection<Document> colBanca;
 		
 	private BD() {
+		//MongoClientURI uri = new MongoClientURI("mongodb://user:pass@host:port/db");
 		mongoClient = new MongoClient();
 		Bd = mongoClient.getDatabase("jogo21");
 		colJogador = Bd.getCollection("jogo");
@@ -50,6 +52,10 @@ public class BD implements BDInterface {
 	
 	public void editarJogador(Document docOld,Document docNew) {
 		colJogador.updateOne(docOld, new Document("$set", docNew));
+	}
+	
+	public void fechar() {
+		this.mongoClient.close();
 	}
 	
 	//Document documento = new Document("nome","thomás").append("carteira", 1);

@@ -30,7 +30,6 @@ public class Mao implements MaoInterface{
 
 	public boolean estourar(){
 		if(ponto > 21){
-			System.out.println("FODEU!");
 			return true;
 		}
 		return false;
