@@ -10,7 +10,7 @@ public class Carta implements CartaInterface{
 	private NaipesEnum naipe;
 	
 	//Construtor: Nome da carta e o seu naipe, escrito de formar Maíuscula e sem acentos
-	Carta (String nome, String naipe) throws Exception{
+	public Carta (String nome, String naipe) throws Exception{
 		try{
 			this.nome = CartaEnum.valueOf(nome);
 		}catch (Exception e) {
@@ -36,6 +36,10 @@ public class Carta implements CartaInterface{
 	//saber o nome da carta
 	public CartaEnum getNome() {
 		return this.nome;
+	}
+	
+	public void setValorAs() {
+		this.nome.setValorAs();
 	}
 
 

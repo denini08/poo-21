@@ -5,6 +5,8 @@ import java.util.Random;
 
 import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
+import poo.jogo.enums.CartaEnum;
+import poo.jogo.enums.NaipesEnum;
 
 public class Baralho implements BaralhoInterface{
 
@@ -17,18 +19,22 @@ public class Baralho implements BaralhoInterface{
 	
 	//Construtor: Passar por parametro a quantidade de jogos que serão utilizados
 	public Baralho(int quantidade) throws Exception{
+		this.initBaralho(quantidade);
+		this.embaralhar();	//por fim o baralho é embaralhado
+	}
+	
+	private void initBaralho(int quantidade) throws Exception{
 		if (quantidade <= 0) throw new Exception("É preciso que tenha pelo menos um baralho");
-		int i,j,k;
+		int k;
 		Carta cartaTemp;
 		for (k = 0; k < quantidade; k++) {	//for da quantidade de jogos(baralho)
-			for (j = 0; j < 4; j++) {	//for dos naipes do baralho
-				for (i = 0; i < 13; i++) {	//for das cartas do naipe
-					cartaTemp = new Carta(numeracao[i], naipes[j]);	//o objeto é criado
+			for (NaipesEnum j : NaipesEnum.values()) {	//for dos naipes do baralho
+				for (CartaEnum i : CartaEnum.values()) {	//for das cartas do naipe
+					cartaTemp = new Carta(i.name(), j.name());	//o objeto é criado
 					cartas.add(cartaTemp);	//e depois é adicionado no ArrayList
 				}
 			}
 		}
-		this.embaralhar();	//por fim o baralho é embaralhado
 	}
 	
 	//puxar uma carta do baralho
