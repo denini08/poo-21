@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.negocio.interf.NegocioInterface;
+import poo.jogo.persistencia.BD;
 
 
 public class Main {
@@ -19,6 +20,7 @@ public class Main {
 		float carteira;
 		float valor;
 		ArrayList<CartaInterface> maoJogadores;
+		
 		
 		try {
 			scan = new Scanner(System.in);
@@ -47,13 +49,13 @@ public class Main {
 					}
 				}
 				else
-					System.out.println("Op√ß√£o n√£o aceita, por favor digite novamente");
+					System.out.println("OpÁ„o n„o aceita, por favor digite novamente");
 			}
 			//scan.close();
 			ArrayList<String> a = n.listarNomeDosjogadores();
 			
 			//LISTAGEM
-			System.out.println("Jogadores j√° Cadastrados!");
+			System.out.println("Jogadores j· Cadastrados!");
 			for(int i=0; i < a.size(); i++) System.out.println(a.get(i));
 			//scan = new Scanner(System.in);
 			while(true) {
@@ -64,7 +66,7 @@ public class Main {
 					if(quant >= 1 &&  quant <= 7){
 						break;
 					} else {
-						System.out.println("Quantidade max permitida √© 7 e a minima √© 1"); //condicao de erro
+						System.out.println("Quantidade max permitida È 7 e a minima È 1"); //condicao de erro
 					} 
 				}catch(Exception e) {
 					System.out.println("Voc√™ n√£o digitou um n√∫mero inteiro!");
@@ -92,14 +94,20 @@ public class Main {
 				System.out.println("Jogador " + n.getNome(i) + " digite o valor da sua aposta");
 				scan.hasNext();
 				valor = scan.nextFloat();
-				n.solicitarAposta(i,  valor);
+				System.out.println(valor);
+				try {
+					n.solicitarAposta(i,  valor);
+				}catch( Exception e) {
+					System.out.println(e.getMessage());
+					i--;
+				}
 			}
 			//scan.close();
 			
 			//DISTRIBUIR
 			System.out.println("Distribuindo cartas");
 			n.distribuir();
-			maoJogadores = n.getBancaMao();
+			maoJogadores = n.getJogadorMao(-1);	//MAO DA BANCA
 			System.out.println("A banca possui: "+maoJogadores.get(0).getNome()+" de "+maoJogadores.get(0).getNaipe());
 			for (int i = 0; i < n.quantidadeJogadoresAtivos(); i++) {
 				maoJogadores = n.getJogadorMao(i);
@@ -144,7 +152,7 @@ public class Main {
 				}while (true);
 			}
 			//IA DA BANCA
-			maoJogadores = n.getBancaMao();
+			maoJogadores = n.getJogadorMao(-1);	//MAO DA BANCA
 			System.out.println("Vez da Banca");
 			System.out.println("Banca Possui:");
 			System.out.println(maoJogadores.get(0).getNome()+" de "+maoJogadores.get(0).getNaipe());
@@ -160,7 +168,7 @@ public class Main {
 						System.err.println(e.getMessage());
 						break;
 					}finally {
-						maoJogadores = n.getBancaMao();
+						maoJogadores = n.getJogadorMao(-1);	//MAO DA BANCA
 						System.out.println("Banca recebeu:");
 						for (int i = 0; i < maoJogadores.size(); i++) {
 							System.out.println(maoJogadores.get(i).getNome()+" de "+maoJogadores.get(i).getNaipe());
@@ -185,11 +193,12 @@ public class Main {
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
-			
-			//n.fecharBanco();
+			n.fecharBanco();
 			
 		}catch(Exception e) {
 		System.err.println(e.getMessage());
+		}finally {
+			BD.getInstance().fechar();
 		}
 	}
 }

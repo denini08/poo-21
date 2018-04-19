@@ -14,7 +14,7 @@ public interface NegocioInterface {
 		
 		public void depositarNaCarteira(String nome, float deposito) throws Exception;
 		
-		public void solicitarAposta(int indice, float valor); 
+		public void solicitarAposta(int indice, float valor) throws Exception; 
 		
 		public void embaralhar() throws Exception;
 		
@@ -25,8 +25,6 @@ public interface NegocioInterface {
 		public int quantidadeJogadoresAtivos();
 		
 		public String getNome(int indice);
-		
-		public ArrayList<CartaInterface> getBancaMao();
 		
 		public ArrayList<CartaInterface> getJogadorMao(int indice);
 		

@@ -9,10 +9,6 @@ import poo.jogo.enums.CartaEnum;
 import poo.jogo.enums.NaipesEnum;
 
 public class Baralho implements BaralhoInterface{
-
-	//Strings estáticas que serão usadas para criar as cartas
-	private static String[] numeracao = {"AS", "DOIS", "TRES", "QUATRO", "CINCO", "SEIS", "SETE", "OITO", "NOVE", "DEZ", "VALETE", "DAMA", "REI"};
-	private static String[] naipes = {"OUROS", "PAUS", "COPAS", "ESPADAS"};
 	
 	//ArrayLista com as cartas do jogo
 	private ArrayList<Carta> cartas = new ArrayList<Carta>();

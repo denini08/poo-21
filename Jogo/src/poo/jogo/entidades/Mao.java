@@ -16,16 +16,18 @@ public class Mao implements MaoInterface{
 
 	public void receberCartas(CartaInterface c){
 		cartas.add(c);
-		pontos();
+		this.calcularPontos();
 	}
 
-	private int pontos(){
+	private void calcularPontos(){
 		this.ponto = 0;
 		for(int i=0 ; i < cartas.size(); i++){
 			this.ponto += this.cartas.get(i).getValor();
 		}
-		estourar();
-		return ponto;
+	}
+	
+	public int getPontos() {
+		return this.ponto;
 	}
 
 	public boolean estourar(){
@@ -35,14 +37,8 @@ public class Mao implements MaoInterface{
 		return false;
 	}
 	
-	public int getPontos(){
-		return this.ponto;
-	}
-	
 	public ArrayList<CartaInterface> getCartas(){
 		return this.cartas;
 	}
 	
-
-
 }

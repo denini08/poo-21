@@ -4,7 +4,7 @@ import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 
-public class Banca extends Jogador implements BancaInterface{
+public class Banca extends JogadorAbstract implements BancaInterface{
 	
 	private BaralhoInterface baralho;
 	
@@ -25,4 +25,10 @@ public class Banca extends Jogador implements BancaInterface{
 	public void embaralhar() {
 		this.baralho.embaralhar();
 	}
+	
+	
+	public void  solicitarCarta() {
+		super.solicitarCarta(this);
+	}
+	
 }

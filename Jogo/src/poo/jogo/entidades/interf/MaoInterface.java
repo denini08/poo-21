@@ -8,9 +8,9 @@ public interface MaoInterface {
 	
 	public boolean estourar();
 	
-	public int getPontos();
-	
 	public ArrayList<CartaInterface> getCartas();
+	
+	public int getPontos();
 	
 	
 }

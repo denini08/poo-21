@@ -90,6 +90,6 @@ public class Persistencia implements PersistenciaInterface {
 	}
 
 	public void fecharBanco() {
-		this.bd.fechar();
+		this.bdInter.fechar();
 	}
 }

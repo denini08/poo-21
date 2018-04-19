@@ -20,8 +20,9 @@ public class Negocio implements NegocioInterface{
 	
 	public Negocio() throws Exception{
 		this.bd = new Persistencia();
-		this.banca = initBanca("BANCA");
+		this.banca = this.initBanca("BANCA");
 		this.jogadores = new ArrayList<JogadorInterface>();
+		
 	}
 
 	public int quantidadeJogadoresAtivos() {
@@ -88,8 +89,10 @@ public class Negocio implements NegocioInterface{
 	}
 	
 
-	public void solicitarAposta(int indice, float valor) {
-		this.jogadores.get(indice).fazerAposta(valor);
+	public void solicitarAposta(int indice, float valor) throws Exception {
+		if (!this.jogadores.get(indice).fazerAposta(valor)) {
+			throw new Exception("Saldo insuficiente");
+		}
 	}
 
 	@Override
@@ -99,31 +102,27 @@ public class Negocio implements NegocioInterface{
 
 
 	public void distribuir() {
-		int i;
-		for (i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
-			jogadores.get(i).solicitarCarta( this.banca.retirarCarta() );	//puxa a 1ª carta para o jogador
-			jogadores.get(i).solicitarCarta( this.banca.retirarCarta() );	//puxa a 2ª carta para o jogador
+		for (int j = 0; j < 2; j++) {
+			for (int i = 0; i < jogadores.size(); i++) {	//for pra pecorrer todos os jogadores
+				jogadores.get(i).solicitarCarta( this.banca );	//puxa a carta para o jogador
+			}
+			banca.solicitarCarta();	//puxa a  carta para a banca
 		}
-		banca.solicitarCarta( this.banca.retirarCarta() );	//puxa a 1ª carta para a banca
-		banca.solicitarCarta( this.banca.retirarCarta() );	//puxa a 2ª carta para a banca
-	}
-
-
-	
-	public ArrayList<CartaInterface> getBancaMao() {
-		return this.banca.getCartasDaMao();
 	}
 	
 	public ArrayList<CartaInterface> getJogadorMao(int indice) {
+		if (indice == -1) {	//-1 E O ID DA BANCA
+			return this.banca.getCartasDaMao();	
+		}
 		return this.jogadores.get(indice).getCartasDaMao();
 	}
 	
 	public void pegaCarta(int indiceJogador) throws Exception {
-		if (indiceJogador ==  -1) {
-			this.banca.solicitarCarta(this.banca.retirarCarta());
+		if (indiceJogador ==  -1) {	//-1 E O ID DA BANCA
+			this.banca.solicitarCarta();
 			return;
 		}
-		this.jogadores.get(indiceJogador).solicitarCarta(this.banca.retirarCarta());
+		this.jogadores.get(indiceJogador).solicitarCarta(this.banca);
 		if(!this.jogadores.get(indiceJogador).getMao().estourar()) {
 			return;
 		}
@@ -175,7 +174,7 @@ public class Negocio implements NegocioInterface{
 	}
 	
 	public int getPontosJogadorAtivo(int indice) {
-		if (indice == -1) {
+		if (indice == -1) {	//-1 E O ID DA BANCA
 			return this.banca.pontos();
 		}
 		return this.jogadores.get(indice).getMao().getPontos();
