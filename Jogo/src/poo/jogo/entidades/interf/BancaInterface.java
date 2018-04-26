@@ -10,4 +10,16 @@ public interface BancaInterface extends JogadorAbstractInterface{
 	
 	public void  solicitarCarta();
 	
+	
+	
+	//COMUNICAÇÃO COM A BANCA 
+	
+	public void pegarCarta(JogadorInterface jogador);
+
+	public void vinteEUm(JogadorInterface jogador);
+	
+	public void estourou(JogadorInterface jogador);
+	
+	public void parar(JogadorInterface jogador);
+	
 }

@@ -14,5 +14,12 @@ public interface JogadorInterface extends JogadorAbstractInterface{
 	
 	public EstadoJogador getEstado_atual();
 	
+	public void ganhou();
+	
+	public void perdeu();
+	
+	public void empatou();
+	
+	public void vinteEUm();
 	
 }
