@@ -7,11 +7,11 @@ import java.util.Iterator;
 
 import javax.print.attribute.standard.JobOriginatingUserName;
 
-import poo.jogo.entidades.Jogador.Esperar;
+/*import poo.jogo.entidades.Jogador.Esperar;
 import poo.jogo.entidades.Jogador.Estourou;
 import poo.jogo.entidades.Jogador.Jogar;
 import poo.jogo.entidades.Jogador.Parar;
-import poo.jogo.entidades.Jogador.VinteEUm;
+import poo.jogo.entidades.Jogador.VinteEUm;*/
 import poo.jogo.entidades.estados.EstadoJogador;
 import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.BaralhoInterface;
