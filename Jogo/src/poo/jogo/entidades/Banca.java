@@ -66,6 +66,9 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		this.jogadoresTodos.add(jogador);
 	}
 	
+	public void iniciar() {
+		this.Estado_atualBanca.Executar(this);
+	}
 	
 	//COMUNICACAO
 	
@@ -167,7 +170,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			Collections.copy(jogadoresEsperando, jogadoresTodos);
+			//Collections.copy(jogadoresEsperando, jogadoresTodos);
 			
 			if(!jogadoresEsperando.isEmpty()) {
 				JogadorInterface jogador = (JogadorInterface) jogadoresEsperando.get(0);

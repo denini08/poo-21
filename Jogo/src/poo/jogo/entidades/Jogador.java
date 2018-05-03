@@ -4,7 +4,6 @@ package poo.jogo.entidades;
 import java.util.Iterator;
 
 import poo.jogo.entidades.estados.EstadoJogador;
-import poo.jogo.entidades.estados.jogador.Esperar;
 import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 
@@ -32,11 +31,10 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	
-	
 	// ITERAÇÃO DE ESTADOS
 	
-	public void executar(BancaInterface banca) {
-		
+	public void jogar(BancaInterface banca) {
+		this.setEstado_atual(getEstadoJogar());
 		this.estado_atual.Executar(banca);
 	}
 	
