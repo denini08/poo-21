@@ -1,6 +1,9 @@
 package poo.jogo.entidades.interf;
 
+import poo.jogo.entidades.estados.EstadoJogador;
+
 public interface BancaInterface extends JogadorAbstractInterface{
+	
 	
 	public CartaInterface retirarCarta();	//puxar uma carta do baralho
 	
@@ -11,6 +14,9 @@ public interface BancaInterface extends JogadorAbstractInterface{
 	public void  solicitarCarta();
 	
 	public void obterJogadores(JogadorInterface jogador);
+	
+	public void iniciar();
+	public EstadoJogador getEstado_atual();
 	
 	
 	

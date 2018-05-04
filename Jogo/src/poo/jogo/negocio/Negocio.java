@@ -33,7 +33,7 @@ public class Negocio implements NegocioInterface{
 		return banca;
 	}*/
 	
-	//ADICIONAR JOGADOR NO ANCO DE DADOS
+	// ADICIONAR JOGADOR NO ANCO DE DADOS
 	public void adicionarJogador(String nome, float saldo) throws Exception { 
 		if(bd.inserirJogador(nome, saldo)) {
 			return;

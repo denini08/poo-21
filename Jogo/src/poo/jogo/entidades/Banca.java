@@ -39,7 +39,12 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		this.jogadoresQuerCarta = new ArrayList<JogadorInterface>();
 		this.jogadoresTodos = new ArrayList<JogadorInterface>();
 		this.jogadoresEsperando = new ArrayList<JogadorInterface>();
-		this.Estado_atualBanca = getEstadoEsperar();
+		this.Estado_atualBanca = getBancaFazerApostas();
+	}
+	
+	public EstadoJogador getEstado_atual() {
+		
+		return this.Estado_atualBanca;
 	}
 	
 	public CartaInterface retirarCarta() {
@@ -55,7 +60,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	}
 	
 	
-	public void  solicitarCarta() {
+	public void solicitarCarta() {
 		super.solicitarCarta(this);
 	}
 
@@ -67,7 +72,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	}
 	
 	public void iniciar() {
-		this.Estado_atualBanca.Executar(this);
+		this.Estado_atualBanca.Executar(this);  //deve comecar em getBancaFazerApostas();
 	}
 	
 	//COMUNICACAO
@@ -101,6 +106,9 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	
 	
 	//ESTADOS SET
+	protected EstadoJogador getBancaFazerApostas() {
+		return new BancaFazerApostas();
+	}
 	
 	private void setEstado_atualBanca(EstadoJogador estado) {
 		this.Estado_atualBanca = estado;
@@ -114,6 +122,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		return new BancaEsperar();
 	}
 	
+
 	protected EstadoJogador getEstadoEstourou() {
 		return new BancaEstourou();
 	}
@@ -384,6 +393,41 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 	}
 	
+	private class BancaFazerApostas implements EstadoJogador{
+
+		@Override
+		public void maoJogavel() {
+			// NAO TEM MAO AINDA
+			
+		}
+
+		@Override
+		public void maoVinteEUm() {
+			//  NAO TEM MAO AINDA
+			
+		}
+
+		@Override
+		public void maoEstorou() {
+			//  NAO TEM MAO AINDA
+			
+		}
+
+		@Override
+		public void maoAlterar() {
+			//  NAO TEM MAO AINDA
+			
+		}
+
+		@Override
+		public void Executar(BancaInterface banca) {
+			for(int i = 0 ; i < jogadoresTodos.size(); ++i) {
+				jogadoresTodos.get(i).set()
+			}
+			
+		}
+		
+	}
 	
 
 }

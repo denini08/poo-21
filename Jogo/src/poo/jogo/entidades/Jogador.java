@@ -2,6 +2,7 @@ package poo.jogo.entidades;
 
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 import poo.jogo.entidades.estados.EstadoJogador;
 import poo.jogo.entidades.interf.BancaInterface;
@@ -32,7 +33,11 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	
 	// ITERAÇÃO DE ESTADOS
-	
+	public boolean FazerAposta() {
+		setEstado_atual(getEstadoApostando());		//ESTADO APOSTANDO
+		return false;
+		
+	}
 	public void jogar(BancaInterface banca) {
 		this.setEstado_atual(getEstadoJogar());
 		this.estado_atual.Executar(banca);
@@ -69,6 +74,9 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	//ESTADOS SET
 	
+	protected EstadoJogador getEstadoApostando() {
+		return new Apostando();
+	}
 	
 	protected EstadoJogador getEstadoEsperar() {
 		return new Esperar();
@@ -284,4 +292,52 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 	}
 
+	private class Apostando implements EstadoJogador{
+
+		@Override
+		public void maoJogavel() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void maoVinteEUm() {
+		
+			
+		}
+
+		@Override
+		public void maoEstorou() {
+			
+			
+		}
+
+		@Override
+		public void maoAlterar() {
+			
+			
+		}
+
+		@Override
+		public void Executar(BancaInterface banca) {
+			int valor;
+			Scanner scan = new Scanner(System.in);
+			while(true) {
+				System.out.println("Jogador "+ getNome() + " voce dejesa apostar 10 ou 50?");
+				scan.hasNext();
+				valor = scan.nextInt();
+				if(valor == 10 || valor == 50) {
+					//FAZER VALER
+					break;
+				} else {
+					System.out.println("Voce digitou um valor incorreto BROWN");
+				}
+				
+			}
+			
+			
+			//scan.close();
+		}
+		
+	}
 }

@@ -3,3 +3,14 @@
 /Carta.class
 /Jogador.class
 /Mao.class
+/Banca$BancaDistribuirCartas.class
+/Banca$BancaEsperar.class
+/Banca$BancaEstourou.class
+/Banca$BancaParar.class
+/Banca$BancaVinteEUm.class
+/Jogador$Esperar.class
+/Jogador$Estourou.class
+/Jogador$Jogar.class
+/Jogador$Parar.class
+/Jogador$VinteEUm.class
+/JogadorAbstract.class
