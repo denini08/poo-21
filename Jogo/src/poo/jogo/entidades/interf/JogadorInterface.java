@@ -4,13 +4,13 @@ import poo.jogo.entidades.estados.EstadoJogador;
 
 public interface JogadorInterface extends JogadorAbstractInterface{
 	
-	public boolean FazerAposta();
+	public void FazerAposta(BancaInterface banca);
 	
-	public boolean fazerAposta(float valor);
+	public void jogar(BancaInterface banca);
+	
+	public void solicitarCarta(BancaInterface banca);
 	
 	public float getValorDaAposta();
-	
-	public void executar(BancaInterface banca);
 	
 	public void setEstado_atual(EstadoJogador estadoJogador);
 	

@@ -19,25 +19,25 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		this.estado_atual = getEstadoEsperar();
 	}
 	
+	protected void setValorAposta(float valor) {
+		this.valorDaAposta = valor;
+	}
+	
 	public float getValorDaAposta() {
 		return this.valorDaAposta;
 	}
-
-	public boolean fazerAposta(float valor) {
-			if(this.Carteira >= valor) {	//SE O SALDO FOR MENOR QUE O VALOR DA APOSTA
-				this.valorDaAposta = valor;
-				return true;
-		}
-			return false;
-	}
 	
+	//CARTAS
+	public void solicitarCarta(BancaInterface banca) {
+		super.solicitarCarta(banca);
+	}
 	
 	// ITERAÇÃO DE ESTADOS
-	public boolean FazerAposta() {
+	public void FazerAposta(BancaInterface banca) {
 		setEstado_atual(getEstadoApostando());		//ESTADO APOSTANDO
-		return false;
-		
+		this.estado_atual.Executar(banca);
 	}
+	
 	public void jogar(BancaInterface banca) {
 		this.setEstado_atual(getEstadoJogar());
 		this.estado_atual.Executar(banca);
@@ -46,6 +46,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	public void setEstado_atual(EstadoJogador estadoJogador) {
 		this.estado_atual = estadoJogador;
 	}
+	
 	
 	public EstadoJogador getEstado_atual() {
 		
@@ -101,6 +102,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	
 	
+	
 	//ESTADOS IMPLEMENTS
 
 	private class Esperar implements EstadoJogador{
@@ -138,9 +140,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 			
 		}
 	}
-		
-	
-		
+			
 	private class Estourou implements EstadoJogador{
 
 		@Override
@@ -175,8 +175,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 	}
 	
-	
-	
 	private class Jogar implements EstadoJogador{
 
 		@Override
@@ -207,9 +205,14 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 		@Override
 		public void Executar(BancaInterface banca) {
+			//ver se o cara estourou ae chama maoEstourou();
+			//perguntar se o cara quer carta;
+			//se ele quiser entrega a carta
+			//se nao coloca ele em Parar;
+			
 			if(querSolicitarCarta()) { // perguntar ao user se ele quer puxar
-				
 				banca.pegarCarta(Jogador.this);
+				//
 			} else {
 				setEstado_atual(getEstadoParar());
 			}
@@ -220,7 +223,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		}
 
 	}
-	
 	
 	private class Parar implements EstadoJogador{
 
@@ -256,7 +258,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		}
 
 	}
-	
 	
 	private class VinteEUm implements EstadoJogador{
 
@@ -326,15 +327,15 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 				System.out.println("Jogador "+ getNome() + " voce dejesa apostar 10 ou 50?");
 				scan.hasNext();
 				valor = scan.nextInt();
-				if(valor == 10 || valor == 50) {
-					//FAZER VALER
+				if(valor == 10 || valor == 50 || valor == 100) {
+					setValorAposta(valor);
 					break;
 				} else {
-					System.out.println("Voce digitou um valor incorreto BROWN");
+					System.out.println("Voce digitou um valor incorreto");
 				}
 				
 			}
-			
+			setEstado_atual(getEstadoEsperar());
 			
 			//scan.close();
 		}

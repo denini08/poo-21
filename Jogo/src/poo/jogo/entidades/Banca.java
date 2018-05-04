@@ -60,7 +60,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	}
 	
 	
-	public void solicitarCarta() {
+	protected void solicitarCarta() {
 		super.solicitarCarta(this);
 	}
 
@@ -194,8 +194,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		}
 	}
 		
-	
-		
 	private class BancaEstourou implements EstadoJogador{
 
 		@Override
@@ -248,8 +246,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 	}
 	
-	
-	
 	private class BancaDistribuirCartas implements EstadoJogador{
 
 		@Override
@@ -280,13 +276,29 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			//distribuir
-			getEstado_atualBanca().Executar(banca);
+			//DISTRIBUIR
+			System.out.println("Distribuindo cartas");
+			for (int j = 0; j < 2; j++) {
+				for (int i = 0; i < jogadoresTodos.size(); i++) {	//for pra pecorrer todos os jogadores
+					jogadoresTodos.get(i).solicitarCarta(banca);	//puxa a carta para o jogador
+				}
+				banca.solicitarCarta(banca);	//puxa a  carta para a banca
+			}
+			
+			if(banca.pontos() == 21) {
+				maoVinteEUm();
+			}else {
+				maoJogavel();
+				for (int i = 0; i < jogadoresTodos.size(); i++){
+					jogadoresTodos.get(i).jogar(banca);
+				}
+			}
+			
+			getEstado_atual().Executar(banca);
 			
 		}
 
 	}
-	
 	
 	private class BancaParar implements EstadoJogador{
 
@@ -347,7 +359,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		}
 
 	}
-	
 	
 	private class BancaVinteEUm implements EstadoJogador{
 
@@ -422,8 +433,9 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		@Override
 		public void Executar(BancaInterface banca) {
 			for(int i = 0 ; i < jogadoresTodos.size(); ++i) {
-				jogadoresTodos.get(i).set()
+				jogadoresTodos.get(i).FazerAposta(banca);
 			}
+			setEstado_atualBanca(getDistribuirCartas());
 			
 		}
 		

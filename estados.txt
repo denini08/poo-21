@@ -1,0 +1,16 @@
+Banca
+	BancaFazerApostas	DONE
+	BancaEsperar
+	BancaEstourou
+	BancaDistribuirCartas   DONE
+	BancaParar
+	BancaVinteEUm
+
+Jogador
+	Esperar
+	Estourou
+	Jogar
+	Parar
+	VinteEUm
+	FazerApostas		DONE
+	
