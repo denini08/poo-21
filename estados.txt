@@ -1,16 +1,17 @@
 Banca
+	BancaJogar		DONE
 	BancaFazerApostas	DONE
-	BancaEsperar
-	BancaEstourou
+	BancaEsperar		DONE
+	BancaEstourou		DONE
 	BancaDistribuirCartas   DONE
-	BancaParar
-	BancaVinteEUm
+	BancaParar		DONE
+	BancaVinteEUm		DONE
 
 Jogador
-	Esperar
-	Estourou
-	Jogar
-	Parar
-	VinteEUm
+	Esperar			DONE
+	Estourou		DONE
+	Jogar			DONE
+	Parar			DONE
+	VinteEUm		DONE
 	FazerApostas		DONE
 	

@@ -18,6 +18,12 @@ public class Mao implements MaoInterface{
 		cartas.add(c);
 		this.calcularPontos();
 	}
+	
+	public void exibirCartas() {
+		for(CartaInterface i : cartas) {
+			System.out.println("\t" + i.getNome()+" de "+i.getNaipe());
+		}
+	}
 
 	private void calcularPontos(){
 		this.ponto = 0;

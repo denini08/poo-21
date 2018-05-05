@@ -25,9 +25,8 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	private ArrayList<JogadorInterface> jogadoresEstourou;
 	private ArrayList<JogadorInterface> jogadoresVinteEUm;
 	private ArrayList<JogadorInterface> jogadoresParou;
-	private ArrayList<JogadorInterface> jogadoresQuerCarta;
 	private ArrayList<JogadorInterface> jogadoresTodos;
-	private ArrayList<JogadorInterface> jogadoresEsperando;
+	
 	
 
 	public Banca(String nome, float saldo) throws Exception {
@@ -36,9 +35,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		this.jogadoresEstourou = new ArrayList<JogadorInterface>();
 		this.jogadoresVinteEUm = new ArrayList<JogadorInterface>();
 		this.jogadoresParou = new ArrayList<JogadorInterface>();
-		this.jogadoresQuerCarta = new ArrayList<JogadorInterface>();
 		this.jogadoresTodos = new ArrayList<JogadorInterface>();
-		this.jogadoresEsperando = new ArrayList<JogadorInterface>();
 		this.Estado_atualBanca = getBancaFazerApostas();
 	}
 	
@@ -62,6 +59,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	
 	protected void solicitarCarta() {
 		super.solicitarCarta(this);
+		
 	}
 
 		
@@ -79,9 +77,8 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	
 	@Override
 	public void pegarCarta(JogadorInterface jogador) {
-		this.jogadoresQuerCarta.add(jogador);
-		
-		
+		//this.jogadoresQuerCarta.add(jogador);
+		jogador.solicitarCarta(this);
 	}
 
 	@Override
@@ -90,6 +87,8 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		
 	}
 
+	
+	
 	@Override
 	public void estourou(JogadorInterface jogador) {
 		this.jogadoresEstourou.add(jogador);
@@ -140,15 +139,80 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	}
 	
 	protected EstadoJogador getEstadoJogar() {
-		return new BancaJogar(); //é pra usar o de jogador! SDS!
+		return new BancaJogar(); //é pra usar o de jogador! SDS! IA DA BANCA
 	}
 
 	
 	
 	
 	//ESTADOS IMPLEMENTS
+	private class BancaJogar implements EstadoJogador{  //IA DA BANCA!!!
 
-	private class BancaEsperar implements EstadoJogador{
+
+		@Override
+		public void maoJogavel() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void maoVinteEUm() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void maoEstorou() {
+			setEstado_atualBanca(getEstadoEstourou());
+		}
+
+		@Override
+		public void maoAlterar() {
+			if(estorou()) {
+				maoEstorou();
+			}else if(pontos() == 21) {
+				setEstado_atualBanca(getEstadoVinteEUm());
+			}
+			
+		}
+
+		@Override
+		public void Executar(BancaInterface banca) {
+			int deQuantosEstouGanhando = 0;
+			
+			for (int i = 0; i < jogadoresParou.size(); i++) {	//CHECAR SE TODOS ESTOURARAM
+				if (banca.pontos() > jogadoresParou.get(i).pontos()) {
+					deQuantosEstouGanhando++;
+				}
+			}
+			
+			if(deQuantosEstouGanhando == jogadoresParou.size() && jogadoresVinteEUm.size() == 0){	//SE A BANCA TIVER GANHANDO DE TODOS
+				setEstado_atualBanca(getEstadoParar());
+				
+			
+			}else if (deQuantosEstouGanhando == 0  && jogadoresVinteEUm.size() >= 0){		//SE A BANCA TIVER PERDENDO DE TODOS OS VIVOS
+				banca.solicitarCarta(banca);
+				maoAlterar();
+			
+				
+			}else if (banca.pontos() < 17) {
+				banca.solicitarCarta(banca);
+				maoAlterar();
+				
+				
+			}else {
+				setEstado_atualBanca(getEstadoParar());
+			}
+			
+			System.out.println("\n Banca Tem: ");
+			getMao().exibirCartas();
+			
+			getEstado_atualBanca().Executar(banca);
+		}
+		
+	}
+
+	private class BancaEsperar implements EstadoJogador{	//FAZER TODOS OS JOGADORES JOGAREM
 
 		@Override
 		public void maoJogavel() {
@@ -179,18 +243,21 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			//Collections.copy(jogadoresEsperando, jogadoresTodos);
+			ArrayList<JogadorInterface> jogadoresEsperando = new ArrayList<JogadorInterface>();
+			Collections.copy(jogadoresEsperando, jogadoresTodos);
 			
 			if(!jogadoresEsperando.isEmpty()) {
 				JogadorInterface jogador = (JogadorInterface) jogadoresEsperando.get(0);
 				jogadoresEsperando.remove(jogador);
-				jogador.executar(banca);
+				jogador.getEstado_atual().Executar(banca);
 			}else {
 				setEstado_atualBanca(getEstadoJogar());
 				//MOSTRAR CARTA
 				getEstado_atualBanca().Executar(banca);
 			}
 			
+			setEstado_atualBanca(getEstadoJogar());		//vai para ia da banca
+			getEstado_atualBanca().Executar(banca);
 		}
 	}
 		
@@ -283,7 +350,12 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 					jogadoresTodos.get(i).solicitarCarta(banca);	//puxa a carta para o jogador
 				}
 				banca.solicitarCarta(banca);	//puxa a  carta para a banca
+				
 			}
+			System.out.println("\n Banca Tem: ");
+			System.out.println(banca.getMao().getCartas().get(0).getNome()+" de "+banca.getMao().getCartas().get(0).getNaipe());
+			
+			
 			
 			if(banca.pontos() == 21) {
 				maoVinteEUm();
@@ -440,6 +512,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		}
 		
 	}
+	
 	
 
 }

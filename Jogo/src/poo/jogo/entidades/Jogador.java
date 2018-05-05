@@ -1,11 +1,13 @@
 package poo.jogo.entidades;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
 import poo.jogo.entidades.estados.EstadoJogador;
 import poo.jogo.entidades.interf.BancaInterface;
+import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 
 public class Jogador extends JogadorAbstract implements JogadorInterface {
@@ -23,6 +25,26 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		this.valorDaAposta = valor;
 	}
 	
+	protected boolean querSolicitarCarta() {
+		Scanner scan = new Scanner(System.in);
+		
+		while(true){
+			System.out.println("jogador " + getNome() +", pega ou para?");
+			scan.hasNext();
+			String escolha = scan.nextLine();
+			if (escolha.equals("pega") || escolha.equals("s")) {
+				return true;
+			}
+			else if (escolha.equals("para") || escolha.equals("n")) {
+				return false;
+			}
+			else {
+				System.out.println("Escolha incorreta, por favor escolha novamente");
+			}
+		}
+		//scan.close();
+	}
+	
 	public float getValorDaAposta() {
 		return this.valorDaAposta;
 	}
@@ -30,6 +52,8 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	//CARTAS
 	public void solicitarCarta(BancaInterface banca) {
 		super.solicitarCarta(banca);
+		System.out.println("\n " + getNome() + " Tem: ");
+		getMao().exibirCartas();
 	}
 	
 	// ITERAÇÃO DE ESTADOS
@@ -57,19 +81,23 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	//RESULTADOS
 	
 	public void ganhou() {
-		//notify ganhou
+		setCarteira(valorDaAposta * 1.5f);
+		System.out.println(getNome() + "Ganhou!! Seu saldo atual eh" + getCarteira());
+		
 	}
 	
 	public void perdeu() {
-		
+		setCarteira(-valorDaAposta);
+		System.out.println(getNome() + "Perdeu!! Seu saldo atual eh" + getCarteira());
 	}
 	
 	public void empatou() {
-		
+		System.out.println(getNome() + "Empatou!! Seu saldo atual eh" + getCarteira());
 	}
 	
 	public void vinteEUm() {
-		
+		setCarteira(valorDaAposta * 2.5f);
+		System.out.println(getNome() + "Ganhou com 21!! Seu saldo atual eh" + getCarteira());
 	}
 	
 	
@@ -169,7 +197,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			banca.estourou(Jogador.this);
+			banca.estourou(Jogador.this); 	//adicionando ao arraylist de jogadores estourados
 			
 		}
 
@@ -185,7 +213,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 		@Override
 		public void maoVinteEUm() {
-			// NAO FAZ NADA
+			setEstado_atual(getEstadoVinteEUm());
 			
 		}
 
@@ -199,26 +227,25 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		@Override
 		public void maoAlterar() {
 			//NOTIFY
-			System.out.println("aLTEROU");
+			if(estorou()) {
+				maoEstorou();
+			} else if (pontos() == 21 ) {
+				maoVinteEUm();
+			}
 			
 		}
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			//ver se o cara estourou ae chama maoEstourou();
-			//perguntar se o cara quer carta;
-			//se ele quiser entrega a carta
-			//se nao coloca ele em Parar;
 			
 			if(querSolicitarCarta()) { // perguntar ao user se ele quer puxar
 				banca.pegarCarta(Jogador.this);
-				//
+				maoAlterar();
 			} else {
 				setEstado_atual(getEstadoParar());
 			}
 			
 			estado_atual.Executar(banca);
-			
 			
 		}
 
@@ -253,7 +280,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		@Override
 		public void Executar(BancaInterface banca) {
 			
-			banca.parar(Jogador.this);
+			banca.parar(Jogador.this); 	//adicionando ao arraylist de jogadores parados
 			
 		}
 
