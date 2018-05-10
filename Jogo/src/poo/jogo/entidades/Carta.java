@@ -38,9 +38,6 @@ public class Carta implements CartaInterface{
 		return this.nome;
 	}
 	
-	public void setValorAs() {
-		this.nome.setValorAs();
-	}
 
 
 }

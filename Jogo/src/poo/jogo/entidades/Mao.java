@@ -27,8 +27,16 @@ public class Mao implements MaoInterface{
 
 	private void calcularPontos(){
 		this.ponto = 0;
+		int quantidadeAS = 0;
 		for(int i=0 ; i < cartas.size(); i++){
 			this.ponto += this.cartas.get(i).getValor();
+			if (this.cartas.get(i).getNome().name().equals("AS")) {
+				quantidadeAS++;
+			}
+		}
+		while (quantidadeAS > 0 && this.ponto > 21) {
+			this.ponto = this.ponto - 10;
+			quantidadeAS--;
 		}
 	}
 	

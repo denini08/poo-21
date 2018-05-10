@@ -12,7 +12,7 @@ public interface BancaInterface extends JogadorAbstractInterface{
 	public void embaralhar();	//embaralhar o baralho
 
 	
-	public void obterJogadores(JogadorInterface jogador);
+	public void obterJogadores(JogadorInterface jogador) throws Exception;
 	
 	public void iniciar();
 	public EstadoJogador getEstado_atual();

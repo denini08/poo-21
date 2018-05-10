@@ -27,9 +27,8 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	protected boolean querSolicitarCarta() {
 		Scanner scan = new Scanner(System.in);
-		
 		while(true){
-			System.out.println("jogador " + getNome() +", pega ou para?");
+			System.out.println("pega ou para?");
 			scan.hasNext();
 			String escolha = scan.nextLine();
 			if (escolha.equals("pega") || escolha.equals("s")) {
@@ -45,6 +44,12 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		//scan.close();
 	}
 	
+	protected void detalhamentoMao() {
+		System.out.println("\n\njogador " + getNome());
+		getMao().exibirCartas();
+		System.out.println("\tPontos: "+getMao().getPontos());
+	}
+	
 	public float getValorDaAposta() {
 		return this.valorDaAposta;
 	}
@@ -52,8 +57,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	//CARTAS
 	public void solicitarCarta(BancaInterface banca) {
 		super.solicitarCarta(banca);
-		System.out.println("\n " + getNome() + " Tem: ");
-		getMao().exibirCartas();
+		
 	}
 	
 	// ITERAÇÃO DE ESTADOS
@@ -82,22 +86,22 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	public void ganhou() {
 		setCarteira(valorDaAposta * 1.5f);
-		System.out.println(getNome() + "Ganhou!! Seu saldo atual eh" + getCarteira());
+		System.out.println(getNome() + " Ganhou!! Seu saldo atual é " + getCarteira());
 		
 	}
 	
 	public void perdeu() {
 		setCarteira(-valorDaAposta);
-		System.out.println(getNome() + "Perdeu!! Seu saldo atual eh" + getCarteira());
+		System.out.println(getNome() + " Perdeu!! Seu saldo atual é " + getCarteira());
 	}
 	
 	public void empatou() {
-		System.out.println(getNome() + "Empatou!! Seu saldo atual eh" + getCarteira());
+		System.out.println(getNome() + " Empatou!! Seu saldo atual é " + getCarteira());
 	}
 	
 	public void vinteEUm() {
 		setCarteira(valorDaAposta * 2.5f);
-		System.out.println(getNome() + "Ganhou com 21!! Seu saldo atual eh" + getCarteira());
+		System.out.println(getNome() + " Ganhou com 21!! Seu saldo atual é " + getCarteira());
 	}
 	
 	
@@ -228,8 +232,10 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		public void maoAlterar() {
 			//NOTIFY
 			if(estorou()) {
+				System.out.println("Você estorou");
 				maoEstorou();
 			} else if (pontos() == 21 ) {
+				System.out.println("Você fez um BlackJack!!!");
 				maoVinteEUm();
 			}
 			
@@ -237,16 +243,18 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			
+			detalhamentoMao();
+			maoAlterar();
+			if (!(getEstado_atual() instanceof Jogar)) {
+				return;
+			}
 			if(querSolicitarCarta()) { // perguntar ao user se ele quer puxar
 				banca.pegarCarta(Jogador.this);
-				maoAlterar();
 			} else {
 				setEstado_atual(getEstadoParar());
+				return;
 			}
-			
 			estado_atual.Executar(banca);
-			
 		}
 
 	}

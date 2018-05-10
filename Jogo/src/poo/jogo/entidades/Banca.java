@@ -65,7 +65,12 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		
 	//INIT
 	
-	public void obterJogadores(JogadorInterface jogador) {
+	public void obterJogadores(JogadorInterface jogador) throws Exception {
+		for (int i = 0; i < this.jogadoresTodos.size(); i++) {
+			if (this.jogadoresTodos.get(i).getNome().equals(jogador.getNome())) {
+				throw new Exception ("Jogador já está na mesa");
+			}
+		}
 		this.jogadoresTodos.add(jogador);
 	}
 	
@@ -243,19 +248,9 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 		@Override
 		public void Executar(BancaInterface banca) {
-			ArrayList<JogadorInterface> jogadoresEsperando = new ArrayList<JogadorInterface>();
-			Collections.copy(jogadoresEsperando, jogadoresTodos);
-			
-			if(!jogadoresEsperando.isEmpty()) {
-				JogadorInterface jogador = (JogadorInterface) jogadoresEsperando.get(0);
-				jogadoresEsperando.remove(jogador);
+			for (JogadorInterface jogador:jogadoresTodos) {
 				jogador.getEstado_atual().Executar(banca);
-			}else {
-				setEstado_atualBanca(getEstadoJogar());
-				//MOSTRAR CARTA
-				getEstado_atualBanca().Executar(banca);
 			}
-			
 			setEstado_atualBanca(getEstadoJogar());		//vai para ia da banca
 			getEstado_atualBanca().Executar(banca);
 		}
@@ -348,15 +343,17 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			for (int j = 0; j < 2; j++) {
 				for (int i = 0; i < jogadoresTodos.size(); i++) {	//for pra pecorrer todos os jogadores
 					jogadoresTodos.get(i).solicitarCarta(banca);	//puxa a carta para o jogador
+					System.out.println("\n " + jogadoresTodos.get(i).getNome() + " Tem: ");
+					jogadoresTodos.get(i).getMao().exibirCartas();
 				}
 				banca.solicitarCarta(banca);	//puxa a  carta para a banca
 				
 			}
 			System.out.println("\n Banca Tem: ");
-			System.out.println(banca.getMao().getCartas().get(0).getNome()+" de "+banca.getMao().getCartas().get(0).getNaipe());
+			System.out.println("\t"+banca.getMao().getCartas().get(0).getNome()+" de "+banca.getMao().getCartas().get(0).getNaipe());
 			
 			
-			
+			System.out.println("\n ----FIM DA DISTRIBUIÇÃO DE CARTAS----\n\n");
 			if(banca.pontos() == 21) {
 				maoVinteEUm();
 			}else {
@@ -365,7 +362,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 					jogadoresTodos.get(i).jogar(banca);
 				}
 			}
-			
 			getEstado_atual().Executar(banca);
 			
 		}
@@ -402,7 +398,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		public void Executar(BancaInterface banca) {
 			
 			Iterator<JogadorInterface> i = jogadoresParou.iterator();
-			
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				if(jogador.getMao().getPontos() == banca.getMao().getPontos()) {
@@ -412,6 +407,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 				} else {
 					jogador.perdeu();
 				}
+				System.out.println(jogador.getMao().getPontos());
 			}
 			
 			i = jogadoresVinteEUm.iterator();
@@ -508,6 +504,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 				jogadoresTodos.get(i).FazerAposta(banca);
 			}
 			setEstado_atualBanca(getDistribuirCartas());
+			getEstado_atualBanca().Executar(banca);
 			
 		}
 		
