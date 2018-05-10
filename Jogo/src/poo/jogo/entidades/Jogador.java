@@ -45,7 +45,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected void detalhamentoMao() {
-		System.out.println("\n\njogador " + getNome());
+		System.out.println("\n\njogador "+ getNome());
 		getMao().exibirCartas();
 		System.out.println("\tPontos: "+getMao().getPontos());
 	}
@@ -359,7 +359,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 			int valor;
 			Scanner scan = new Scanner(System.in);
 			while(true) {
-				System.out.println("Jogador "+ getNome() + " voce dejesa apostar 10 ou 50?");
+				System.out.println("Jogador "+ getNome() + " voce dejesa apostar 10 ou 50 ou 100?");
 				scan.hasNext();
 				valor = scan.nextInt();
 				if(valor == 10 || valor == 50 || valor == 100) {

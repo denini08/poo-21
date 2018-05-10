@@ -17,6 +17,7 @@ public class Baralho implements BaralhoInterface{
 	public Baralho(int quantidade) throws Exception{
 		this.initBaralho(quantidade);
 		this.embaralhar();	//por fim o baralho é embaralhado
+		
 	}
 	
 	private void initBaralho(int quantidade) throws Exception{

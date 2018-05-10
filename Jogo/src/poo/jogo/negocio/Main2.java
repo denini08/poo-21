@@ -83,7 +83,7 @@ public class Main2 {
 			
 			//A PARTIR DAQUI É O INICIO DO JOGO
 			banca.iniciar();
-			//A PARTIR DAQUI VAI SER SÓ COM A BANCA, FAZER O QUE NÉ...
+			
 
 		}catch (Exception e) {
 			

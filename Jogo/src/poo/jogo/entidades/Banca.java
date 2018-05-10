@@ -162,12 +162,14 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 		@Override
 		public void maoVinteEUm() {
-			// TODO Auto-generated method stub
+			System.out.println("A banca fez 21!");
+			setEstado_atualBanca(getEstadoVinteEUm());
 			
 		}
 
 		@Override
 		public void maoEstorou() {
+			System.err.println("Banca Estorou!");
 			setEstado_atualBanca(getEstadoEstourou());
 		}
 
@@ -176,7 +178,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			if(estorou()) {
 				maoEstorou();
 			}else if(pontos() == 21) {
-				setEstado_atualBanca(getEstadoVinteEUm());
+				maoVinteEUm();
 			}
 			
 		}
@@ -184,6 +186,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		@Override
 		public void Executar(BancaInterface banca) {
 			int deQuantosEstouGanhando = 0;
+			
 			
 			for (int i = 0; i < jogadoresParou.size(); i++) {	//CHECAR SE TODOS ESTOURARAM
 				if (banca.pontos() > jogadoresParou.get(i).pontos()) {
@@ -208,9 +211,9 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			}else {
 				setEstado_atualBanca(getEstadoParar());
 			}
-			
 			System.out.println("\n Banca Tem: ");
 			getMao().exibirCartas();
+			
 			
 			getEstado_atualBanca().Executar(banca);
 		}
