@@ -11,7 +11,7 @@ import poo.jogo.enums.NaipesEnum;
 public class Baralho implements BaralhoInterface{
 	
 	//ArrayLista com as cartas do jogo
-	private ArrayList<Carta> cartas = new ArrayList<Carta>();
+	protected ArrayList<Carta> cartas = new ArrayList<Carta>();
 	
 	//Construtor: Passar por parametro a quantidade de jogos que serão utilizados
 	public Baralho(int quantidade) throws Exception{
@@ -19,8 +19,9 @@ public class Baralho implements BaralhoInterface{
 		this.embaralhar();	//por fim o baralho é embaralhado
 		
 	}
+
 	
-	private void initBaralho(int quantidade) throws Exception{
+	protected void initBaralho(int quantidade) throws Exception{
 		if (quantidade <= 0) throw new Exception("É preciso que tenha pelo menos um baralho");
 		int k;
 		Carta cartaTemp;
