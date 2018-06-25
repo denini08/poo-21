@@ -6,7 +6,7 @@ public class MainGUI {
 		try{
 			VBaralho baralho = new VBaralho(1);
 			CardView view = new CardView((VCard) baralho.retirarCarta());
-			view.get
+			//view.get
 		}catch(Exception e) {
 			
 		}

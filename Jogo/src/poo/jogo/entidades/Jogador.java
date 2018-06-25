@@ -44,6 +44,23 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		//scan.close();
 	}
 	
+	protected boolean VquerSolicitarCarta() {
+		while(true){
+			System.out.println("pega ou para?");
+			//butao Pega ou Para, seta variavel 
+			String escolha = "";//getHitPegaouparastringbutton() - gui
+			
+			if (escolha.equals("pega") || escolha.equals("s")) {
+				//setnullHitPegaouparastringbutton()
+				return true;
+			}
+			if (escolha.equals("para") || escolha.equals("n")) {
+				//setnullHitPegaouparastringbutton()
+				return false;
+			}
+		}
+	}
+	
 	protected void detalhamentoMao() {
 		System.out.println("\n\njogador "+ getNome());
 		getMao().exibirCartas();
@@ -108,7 +125,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	//ESTADOS SET
 	
 	protected EstadoJogador getEstadoApostando() {
-		return new Apostando();
+		return new VApostando();
 	}
 	
 	protected EstadoJogador getEstadoEsperar() {
@@ -116,11 +133,11 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected EstadoJogador getEstadoEstourou() {
-		return new Estourou();
+		return new VEstourou();
 	}
 	
 	protected EstadoJogador getEstadoJogar() {
-		return new Jogar();
+		return new VJogar();
 	}
 	
 	protected EstadoJogador getEstadoParar() {
@@ -128,7 +145,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected EstadoJogador getEstadoVinteEUm() {
-		return new VinteEUm();
+		return new VVinteEUm();
 	}
 
 	
@@ -376,4 +393,49 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		}
 		
 	}
+	
+	private class VApostando extends Apostando {		
+		
+		public void Executar(BancaInterface banca) {
+			//POPUP - combo box - passando this
+			setEstado_atual(getEstadoEsperar());
+		}
+	}
+	
+	private class VEstourou extends Estourou{
+		
+		public void Executar(BancaInterface banca) {
+			//POPUP - JOGADOR ESTOUROU
+			super.Executar(banca);
+		}
+	}
+	
+	private class VJogar extends Jogar{
+		
+		public void Executar(BancaInterface banca) {
+			detalhamentoMao();
+			maoAlterar();
+			if (!(getEstado_atual() instanceof Jogar)) {
+				return;
+			}
+			if(VquerSolicitarCarta()) { // perguntar ao user se ele quer puxar
+				banca.pegarCarta(Jogador.this);
+			} else {
+				setEstado_atual(getEstadoParar());
+				return;
+			}
+			estado_atual.Executar(banca);
+		}
+	
+	}
+	
+	private class VVinteEUm extends VinteEUm{
+		public void Executar(BancaInterface banca) {
+			//POPUP FEZ VINTE E UM
+			super.Executar(banca);
+			
+		}
+		
+		}
+
 }

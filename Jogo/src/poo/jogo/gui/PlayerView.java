@@ -27,7 +27,7 @@ public class PlayerView extends JPanel implements EstadoJogador{
 		cartas.setBorder(borda);
 		cartas.setBackground(new Color(35, 142, 35));
 		borda.setTitleColor(Color.black);
-		jogador.
+		//jogador.
 	}
 
 	@Override

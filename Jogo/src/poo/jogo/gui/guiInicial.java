@@ -11,6 +11,10 @@ import java.time.Clock;
 import java.util.ArrayList;
 import javax.swing.JTextField;
 
+import poo.jogo.entidades.Banca;
+import poo.jogo.entidades.Jogador;
+import poo.jogo.entidades.interf.BancaInterface;
+
 /**
  *
  * @author thoma
@@ -123,7 +127,11 @@ public class guiInicial extends javax.swing.JFrame {
         jButtonJogar.setText("JOGAR!!!");
         jButtonJogar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonJogarMouseClicked(evt);
+                try {
+					jButtonJogarMouseClicked(evt);
+				} catch (Exception e) {
+					//POPUP NOME IGUAL - RENICIA O JOGO
+				}
             }
         });
 
@@ -224,13 +232,19 @@ public class guiInicial extends javax.swing.JFrame {
         this.textJogador7.setText("");
     }                                         
 
-    private void jButtonJogarMouseClicked(java.awt.event.MouseEvent evt) {                                          
+    private void jButtonJogarMouseClicked(java.awt.event.MouseEvent evt) throws Exception { //CHAMA TUDOOOOOOOO
+    	BancaInterface banca = null;
+		banca = new Banca("BANCA", 5000);
+    	JTextField lista[] = {textJogador1,textJogador2,textJogador3,textJogador4,textJogador5,textJogador6,textJogador7};
         int cont = this.quantidadeJogadores.getSelectedIndex() + 1;
         String texto = "textJogador";
         for (int i = 0; i < cont; i++){
             System.out.println(lista[i].getText());
-           
+            banca.obterJogadores(new Jogador(lista[i].getText(), 1000));
+            
         }
+        
+        banca.iniciar();
     }                                         
 
     private void quantidadeJogadoresActionPerformed(java.awt.event.ActionEvent evt) {                                                    
