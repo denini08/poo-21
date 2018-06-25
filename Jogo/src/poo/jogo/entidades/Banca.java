@@ -72,6 +72,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			}
 		}
 		this.jogadoresTodos.add(jogador);
+		System.out.println(jogador.getNome());
 	}
 	
 	public void iniciar() {
