@@ -121,11 +121,36 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		System.out.println(getNome() + " Ganhou com 21!! Seu saldo atual é " + getCarteira());
 	}
 	
+	// RESULTADOS VIEW
+	
+	public void ganhouV() {
+		setCarteira(valorDaAposta * 1.5f);
+		System.out.println(getNome() + " Ganhou!! Seu saldo atual é " + getCarteira());
+		//popup ganhou
+		
+	}
+	
+	public void perdeuV() {
+		setCarteira(-valorDaAposta);
+		System.out.println(getNome() + " Perdeu!! Seu saldo atual é " + getCarteira());
+		//popup perdeu
+	}
+	
+	public void empatouV() {
+		System.out.println(getNome() + " Empatou!! Seu saldo atual é " + getCarteira());
+		//popup empatou
+	}
+	
+	public void vinteEUmV() {
+		setCarteira(valorDaAposta * 2.5f);
+		System.out.println(getNome() + " Ganhou com 21!! Seu saldo atual é " + getCarteira());
+		//popup vinte e um 
+	}
 	
 	//ESTADOS SET
 	
 	protected EstadoJogador getEstadoApostando() {
-		return new VApostando();
+		return new Apostando();
 	}
 	
 	protected EstadoJogador getEstadoEsperar() {
@@ -133,11 +158,11 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected EstadoJogador getEstadoEstourou() {
-		return new VEstourou();
+		return new Estourou();
 	}
 	
 	protected EstadoJogador getEstadoJogar() {
-		return new VJogar();
+		return new Jogar();
 	}
 	
 	protected EstadoJogador getEstadoParar() {
@@ -145,6 +170,33 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected EstadoJogador getEstadoVinteEUm() {
+		return new VinteEUm();
+	}
+	
+	
+	//ESTADOS SET VIEW
+	
+	protected EstadoJogador getVEstadoApostando() {
+		return new VApostando();
+	}
+	
+	protected EstadoJogador getVEstadoEsperar() {
+		return new VEsperar();
+	}
+	
+	protected EstadoJogador getVEstadoEstourou() {
+		return new VEstourou();
+	}
+	
+	protected EstadoJogador getVEstadoJogar() {
+		return new VJogar();
+	}
+	
+	protected EstadoJogador getVEstadoParar() {
+		return new VParar();
+	}
+	
+	protected EstadoJogador getVEstadoVinteEUm() {
 		return new VVinteEUm();
 	}
 
@@ -349,7 +401,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 		@Override
 		public void maoJogavel() {
-			// TODO Auto-generated method stub
 			
 		}
 
@@ -394,11 +445,14 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		
 	}
 	
+	
+	//VIEW  ESTADOS IMPLEMENT
+
 	private class VApostando extends Apostando {		
 		
 		public void Executar(BancaInterface banca) {
 			//POPUP - combo box - passando this
-			setEstado_atual(getEstadoEsperar());
+			setEstado_atual(getVEstadoEsperar());
 		}
 	}
 	
@@ -408,6 +462,20 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 			//POPUP - JOGADOR ESTOUROU
 			super.Executar(banca);
 		}
+	}
+	
+	private class VEsperar extends Esperar{
+		
+		public void maoJogavel() {
+			setEstado_atual(getVEstadoJogar());
+		}
+		
+		public void maoVinteEUm() {
+			setEstado_atual(getVEstadoVinteEUm());
+		}
+		
+		
+		
 	}
 	
 	private class VJogar extends Jogar{
@@ -421,12 +489,20 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 			if(VquerSolicitarCarta()) { // perguntar ao user se ele quer puxar
 				banca.pegarCarta(Jogador.this);
 			} else {
-				setEstado_atual(getEstadoParar());
+				setEstado_atual(getVEstadoParar());
 				return;
 			}
 			estado_atual.Executar(banca);
 		}
 	
+	}
+	
+	private class VParar extends Parar{
+		
+		public void Executar(BancaInterface banca) {
+			super.Executar(banca);
+		}
+		
 	}
 	
 	private class VVinteEUm extends VinteEUm{

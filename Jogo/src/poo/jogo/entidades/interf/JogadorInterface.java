@@ -24,4 +24,12 @@ public interface JogadorInterface extends JogadorAbstractInterface{
 	
 	public void vinteEUm();
 	
+	public void ganhouV();
+	
+	public void perdeuV();
+	
+	public void empatouV();
+	
+	public void vinteEUmV();
+	
 }
