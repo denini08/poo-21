@@ -29,4 +29,9 @@ public interface BancaInterface extends JogadorAbstractInterface{
 	
 	public void parar(JogadorInterface jogador);
 	
+	
+	//VIEW
+	
+	public void iniciarV();
+	
 }

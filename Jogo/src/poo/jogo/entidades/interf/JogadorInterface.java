@@ -24,6 +24,8 @@ public interface JogadorInterface extends JogadorAbstractInterface{
 	
 	public void vinteEUm();
 	
+	//VIEW
+	
 	public void ganhouV();
 	
 	public void perdeuV();
@@ -32,4 +34,7 @@ public interface JogadorInterface extends JogadorAbstractInterface{
 	
 	public void vinteEUmV();
 	
+	public void FazerApostaV(BancaInterface banca);
+	
+	public void jogarV(BancaInterface banca);
 }

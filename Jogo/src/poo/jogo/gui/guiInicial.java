@@ -232,7 +232,7 @@ public class guiInicial extends javax.swing.JFrame {
         this.textJogador7.setText("");
     }                                         
 
-    private void jButtonJogarMouseClicked(java.awt.event.MouseEvent evt) throws Exception { //CHAMA TUDOOOOOOOO
+    private void jButtonJogarMouseClicked(java.awt.event.MouseEvent evt) throws Exception { //CHAMA TUDOOOOOOOO - AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
     	BancaInterface banca = null;
 		banca = new Banca("BANCA", 5000);
     	JTextField lista[] = {textJogador1,textJogador2,textJogador3,textJogador4,textJogador5,textJogador6,textJogador7};
@@ -244,7 +244,7 @@ public class guiInicial extends javax.swing.JFrame {
             
         }
         
-        banca.iniciar();
+        banca.iniciarV();
     }                                         
 
     private void quantidadeJogadoresActionPerformed(java.awt.event.ActionEvent evt) {                                                    

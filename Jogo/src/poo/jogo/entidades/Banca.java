@@ -627,7 +627,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			}else {
 				maoJogavel();
 				for (int i = 0; i < jogadoresTodos.size(); i++){
-					jogadoresTodos.get(i).jogar(banca);
+					jogadoresTodos.get(i).jogarV(banca);
 				}
 			}
 			getEstado_atual().Executar(banca);
@@ -692,7 +692,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		
 		public void Executar(BancaInterface banca) {
 			for(int i = 0 ; i < jogadoresTodos.size(); ++i) {
-				jogadoresTodos.get(i).FazerAposta(banca);
+				jogadoresTodos.get(i).FazerApostaV(banca);
 			}
 			setEstado_atualBanca(getVDistribuirCartas());
 			getEstado_atualBanca().Executar(banca);

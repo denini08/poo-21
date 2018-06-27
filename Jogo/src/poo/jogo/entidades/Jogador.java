@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import poo.jogo.entidades.estados.EstadoJogador;
 import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.CartaInterface;
@@ -44,18 +46,23 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		//scan.close();
 	}
 	
+	private String solicitarPOPUP(String nome) {
+		Object[] escolhas = {"PEGAR", "PARAR"};
+		String[] valor = {"pega","para"};
+		int index = JOptionPane.showOptionDialog(null, nome + " Escolha sua aposta", "Aposta", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
+		return valor[index];
+	}
+	
 	protected boolean VquerSolicitarCarta() {
 		while(true){
 			System.out.println("pega ou para?");
-			//butao Pega ou Para, seta variavel 
-			String escolha = "";//getHitPegaouparastringbutton() - gui
+			
+			String escolha = this.solicitarPOPUP(getNome()); // HIT BUTTON
 			
 			if (escolha.equals("pega") || escolha.equals("s")) {
-				//setnullHitPegaouparastringbutton()
 				return true;
 			}
 			if (escolha.equals("para") || escolha.equals("n")) {
-				//setnullHitPegaouparastringbutton()
 				return false;
 			}
 		}
@@ -96,6 +103,18 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	public EstadoJogador getEstado_atual() {
 		
 		return this.estado_atual;
+	}
+	
+	//ITERAÇÃO DE ESTADOS - VIEW
+	
+	public void FazerApostaV(BancaInterface banca) {
+		setEstado_atual(getVEstadoApostando());		//ESTADO APOSTANDO
+		this.estado_atual.Executar(banca);
+	}
+	
+	public void jogarV(BancaInterface banca) {
+		this.setEstado_atual(getVEstadoJogar());
+		this.estado_atual.Executar(banca);
 	}
 	
 	
@@ -450,8 +469,16 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 	private class VApostando extends Apostando {		
 		
+		private float apostaPOPUP(String nome) {
+			Object[] escolhas = {"$10", "$50", "$100"};
+			float[] valor = {10,50,100};
+			int index = JOptionPane.showOptionDialog(null, nome + " Escolha sua aposta", "Aposta", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
+			return valor[index];
+		}
+		
 		public void Executar(BancaInterface banca) {
-			//POPUP - combo box - passando this
+			float valor = apostaPOPUP(getNome());
+			setValorAposta(valor);
 			setEstado_atual(getVEstadoEsperar());
 		}
 	}
