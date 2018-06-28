@@ -53,7 +53,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	private int slaveSolicitarPOPUP(String nome) {
 		Object[] escolhas = {"PEGAR", "PARAR"};
-		int index = JOptionPane.showOptionDialog(null, nome + " Escolha sua aposta", "Aposta", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
+		int index = JOptionPane.showOptionDialog(null, nome + " , você deseja pegar ou puxar?", "Jogar", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
 		if(index == JOptionPane.CLOSED_OPTION) {
 			System.out.println("fechou miseravel");
 			index = slaveSolicitarPOPUP(nome);

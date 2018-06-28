@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import javax.print.attribute.standard.JobOriginatingUserName;
+import javax.swing.JOptionPane;
 
 /*import poo.jogo.entidades.Jogador.Esperar;
 import poo.jogo.entidades.Jogador.Estourou;
@@ -567,11 +568,15 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	private class VBancaEstourou extends BancaEstourou{
 		
 		public void Executar(BancaInterface banca) {
+			
+			String viewGanhador = "";
+			String viewPrededor = "";
 			Iterator<JogadorInterface> i = jogadoresParou.iterator();
 			
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				jogador.ganhouV();
+				viewGanhador += "\t" + jogador.getNome() + "\n";
 			}
 			
 			i = jogadoresVinteEUm.iterator();
@@ -579,6 +584,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				jogador.ganhouV();
+				viewGanhador += "\t" + jogador.getNome() + "\n";
 			}
 			
 			i = jogadoresEstourou.iterator();
@@ -586,7 +592,11 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				jogador.perdeuV();
+				viewPrededor += "\t" + jogador.getNome() + "\n";
 			}
+			
+			POPUPResVenceu(viewGanhador);
+			POPUPResPerdeu(viewPrededor);
 		}
 
 	}
@@ -638,16 +648,23 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	private class VBancaParar extends BancaParar{
 		
 		public void Executar(BancaInterface banca) {
+			String viewPerdedor = "";
+			String viewEmpatou = "";
+			String viewGanhador = "";
+			String viewBlackJack = "";
 			
 			Iterator<JogadorInterface> i = jogadoresParou.iterator();
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				if(jogador.getMao().getPontos() == banca.getMao().getPontos()) {
 					jogador.empatouV();
+					viewEmpatou += "\t" + jogador.getNome() + "\n";
 				} else if(jogador.getMao().getPontos() > banca.getMao().getPontos()) {
 					jogador.ganhouV();
+					viewGanhador += "\t" + jogador.getNome() + "\n";
 				} else {
 					jogador.perdeuV();
+					viewPerdedor += "\t" + jogador.getNome() + "\n";
 				}
 				System.out.println(jogador.getMao().getPontos());
 			}
@@ -657,6 +674,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				jogador.ganhouV();
+				viewGanhador += "\t" + jogador.getNome() + "\n";
 			}
 			
 			i = jogadoresEstourou.iterator();
@@ -664,8 +682,13 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				jogador.perdeuV();
+				viewPerdedor += "\t" + jogador.getNome() + "\n";
 			}
 			
+			POPUPResBlackjack(viewBlackJack);
+			POPUPResEmpatar(viewEmpatou);
+			POPUPResPerdeu(viewPerdedor);
+			POPUPResVenceu(viewGanhador);
 		}
 		
 	}
@@ -675,15 +698,21 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		public void Executar(BancaInterface banca) {
 
 			Iterator<JogadorInterface> i = jogadoresTodos.iterator();
-			
+			String viewPerdedor = "";
+			String viewEmpatou = "";
 			while(i.hasNext()) {
 				JogadorInterface jogador = (JogadorInterface) i.next();
 				if(jogador.getMao().getPontos() == 21) {
 					jogador.empatouV();
+					viewEmpatou += "\t" + jogador.getNome() + "\n";
 				}else {
 					jogador.perdeuV();
+					viewPerdedor += "\t" + jogador.getNome() + "\n";
 				}
 			}
+			
+			POPUPResEmpatar(viewEmpatou);
+			POPUPResPerdeu(viewPerdedor);
 			
 		}
 	}
@@ -703,14 +732,14 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	private class VBancaJogar extends BancaJogar{
 		
 		public void maoVinteEUm() {
-			//popup banca vez 21 - > ("A banca fez 21!");
+			JOptionPane.showMessageDialog(null, "BANCA fez BlackJack");
 			setEstado_atualBanca(getVEstadoVinteEUm());
 			
 		}
 
 		
 		public void maoEstorou() {
-			// popup Banca estorou -> ("Banca Estorou!");
+			JOptionPane.showMessageDialog(null, " Banca Estourou");
 			setEstado_atualBanca(getVEstadoEstourou());
 		}
 
@@ -758,6 +787,34 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			
 			
 			getEstado_atualBanca().Executar(banca);
+		}
+	}
+	
+	private void POPUPResPerdeu(String res) {
+		if(!res.isEmpty()){
+	
+			JOptionPane.showMessageDialog(null, "Perdedor(es) : \n" + res);
+		}
+	}
+	
+	private void POPUPResVenceu(String res) {
+		if(!res.isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Ganhador(es) : \n" + res);
+		}
+	}
+	
+	private void POPUPResEmpatar(String res) {
+		if(!res.isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Empatar : \n" + res);
+		}
+	}
+	
+	private void POPUPResBlackjack(String res) {
+		if(!res.isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "BlackJack('s) : \n" + res);
 		}
 	}
 }
