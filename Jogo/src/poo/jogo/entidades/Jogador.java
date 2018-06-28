@@ -47,10 +47,18 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	private String solicitarPOPUP(String nome) {
-		Object[] escolhas = {"PEGAR", "PARAR"};
 		String[] valor = {"pega","para"};
+		return valor[slaveSolicitarPOPUP(nome)];
+	}
+	
+	private int slaveSolicitarPOPUP(String nome) {
+		Object[] escolhas = {"PEGAR", "PARAR"};
 		int index = JOptionPane.showOptionDialog(null, nome + " Escolha sua aposta", "Aposta", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
-		return valor[index];
+		if(index == JOptionPane.CLOSED_OPTION) {
+			System.out.println("fechou miseravel");
+			index = slaveSolicitarPOPUP(nome);
+		}
+		return index;
 	}
 	
 	protected boolean VquerSolicitarCarta() {
@@ -470,10 +478,19 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	private class VApostando extends Apostando {		
 		
 		private float apostaPOPUP(String nome) {
-			Object[] escolhas = {"$10", "$50", "$100"};
 			float[] valor = {10,50,100};
+			return valor[slaveApostaPOPUP(nome)];
+		}
+		
+		private int slaveApostaPOPUP(String nome) {
+			Object[] escolhas = {"$10", "$50", "$100"};
 			int index = JOptionPane.showOptionDialog(null, nome + " Escolha sua aposta", "Aposta", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
-			return valor[index];
+			
+			if(index == JOptionPane.CLOSED_OPTION) {
+				System.out.println("fechou miseravel");
+				index = slaveApostaPOPUP(nome);
+			}
+			return index;
 		}
 		
 		public void Executar(BancaInterface banca) {
@@ -486,7 +503,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	private class VEstourou extends Estourou{
 		
 		public void Executar(BancaInterface banca) {
-			//POPUP - JOGADOR ESTOUROU
 			super.Executar(banca);
 		}
 	}
@@ -506,6 +522,29 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	private class VJogar extends Jogar{
+		
+		
+		public void maoVinteEUm() {
+			JOptionPane.showMessageDialog(null, getNome() + " BlackJack");
+			setEstado_atual(getVEstadoVinteEUm());
+			
+		}
+
+		public void maoEstorou() {
+			JOptionPane.showMessageDialog(null, getNome() + " Estourou");
+			setEstado_atual(getVEstadoEstourou());
+			
+		}
+		
+		public void maoAlterar() {
+			if(estorou()) {
+				System.out.println("Você estorou");
+				maoEstorou();
+			} else if (pontos() == 21 ) {
+				System.out.println("Você fez um BlackJack!!!");
+				maoVinteEUm();
+			}
+		}
 		
 		public void Executar(BancaInterface banca) {
 			detalhamentoMao();
@@ -534,7 +573,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	private class VVinteEUm extends VinteEUm{
 		public void Executar(BancaInterface banca) {
-			//POPUP FEZ VINTE E UM
 			super.Executar(banca);
 			
 		}
