@@ -92,7 +92,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 	
 
 	private void addBanca() {
-		this.inserirJogador("Banca", "Comencando");
+		this.inserirJogador("Banca", "ESPERANDO");
 		
 	}
 
@@ -118,12 +118,15 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		for(int i = 0 ; i < this.jogadores.size(); i++) {			//encontrando a posicao do jogador no array
 			if(this.jogadores.get(i).equals(nomeJogador)) {
 				index = i;
+				System.out.println(i + nomeJogador + estadoJogador);
 				break;
 			}
 		}
 		
+		System.out.println(index + "  index");
+		
 		if(index == null ) {
-			System.out.println("fudeo SetEstado");
+			System.out.println("Index não encontrado - SetEstado");
 			return;
 		}
 		

@@ -10,4 +10,7 @@ public interface GuiPrincipalInterface {
 	public void setEstado(String nomeJogador, String estadoJogador);
 	
 	public void setAposta(String nomeJogador, float valor);
+	
+	public void setVisible(boolean bool);
+	
 }

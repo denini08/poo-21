@@ -130,6 +130,7 @@ public class GuiInicial extends javax.swing.JFrame {
                 try {
 					jButtonJogarMouseClicked(evt);
 				} catch (Exception e) {
+					e.printStackTrace();
 					//POPUP NOME IGUAL - RENICIA O JOGO
 				}
             }

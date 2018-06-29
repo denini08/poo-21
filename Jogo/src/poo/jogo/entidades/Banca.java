@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import javax.print.attribute.standard.JobOriginatingUserName;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 /*import poo.jogo.entidades.Jogador.Esperar;
@@ -171,6 +172,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	
 	protected EstadoJogador getVBancaFazerApostas() {
 		this.guiPrincipal.setEstado("BANCA","APOSTANDO");
+		this.guiPrincipal.setVisible(true);
 		return new VBancaFazerApostas();
 	}
 		
