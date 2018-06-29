@@ -84,12 +84,13 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 
 	// VIEW GUI INIT
 	
-	public void iniciarV() { 
-		this.guiPrincipal = new GuiPrincipal();
+	public void iniciarV(int quant_jogadores) { 
+		this.guiPrincipal = new GuiPrincipal(quant_jogadores);
 		Jogador.initJogadorGuiView(this.guiPrincipal);
 		
 		for(JogadorInterface jogador:this.jogadoresTodos) {
 			jogador.setEstado_atual(getVEstadoEsperar());
+			guiPrincipal.inserirJogador(jogador.getNome(), "ESPERAR");
 		}
 		
 		setEstado_atualBanca(getVBancaFazerApostas());
@@ -835,4 +836,5 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			JOptionPane.showMessageDialog(null, "BlackJack('s) : \n" + res);
 		}
 	}
+
 }

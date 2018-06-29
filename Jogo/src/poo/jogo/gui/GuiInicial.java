@@ -244,7 +244,7 @@ public class GuiInicial extends javax.swing.JFrame {
             
         }
         
-        banca.iniciarV();
+        banca.iniciarV(cont);
     }                                         
 
     private void quantidadeJogadoresActionPerformed(java.awt.event.ActionEvent evt) {                                                    

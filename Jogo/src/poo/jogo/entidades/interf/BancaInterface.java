@@ -32,6 +32,6 @@ public interface BancaInterface extends JogadorAbstractInterface{
 	
 	//VIEW
 	
-	public void iniciarV();
+	public void iniciarV(int quant_jogadores);
 	
 }
