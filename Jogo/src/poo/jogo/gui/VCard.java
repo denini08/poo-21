@@ -1,8 +1,6 @@
 package poo.jogo.gui;
 
 
-import javax.swing.border.Border;
-
 import poo.jogo.entidades.Carta;
 
 public class VCard extends Carta {

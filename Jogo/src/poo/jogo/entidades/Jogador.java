@@ -1,21 +1,19 @@
 package poo.jogo.entidades;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
-
 import poo.jogo.entidades.estados.EstadoJogador;
 import poo.jogo.entidades.interf.BancaInterface;
-import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
+import poo.jogo.gui.GuiPrincipalInterface;
 
 public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	private float valorDaAposta;
 	private EstadoJogador estado_atual;
+	private static GuiPrincipalInterface guiPrincipal;
+	
 
 	public Jogador(String nome, float saldo) {
 		super(nome, saldo);
@@ -26,6 +24,13 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	protected void setValorAposta(float valor) {
 		this.valorDaAposta = valor;
 	}
+	
+	public static void initJogadorGuiView(GuiPrincipalInterface guiPrincipal_) {
+		guiPrincipal = guiPrincipal_;
+	}
+	
+	
+	//COMANDLINE
 	
 	protected boolean querSolicitarCarta() {
 		Scanner scan = new Scanner(System.in);
@@ -45,6 +50,9 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		}
 		//scan.close();
 	}
+	
+	
+	//SOLICITAÇÃO VIA POPUP
 	
 	private String solicitarPOPUP(String nome) {
 		String[] valor = {"pega","para"};
@@ -116,11 +124,13 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	//ITERAÇÃO DE ESTADOS - VIEW
 	
 	public void FazerApostaV(BancaInterface banca) {
+		this.guiPrincipal.setEstado(this.getNome(), "APOSTANDO");
 		setEstado_atual(getVEstadoApostando());		//ESTADO APOSTANDO
 		this.estado_atual.Executar(banca);
 	}
 	
 	public void jogarV(BancaInterface banca) {
+		this.guiPrincipal.setEstado(this.getNome(), "JOGANDO");
 		this.setEstado_atual(getVEstadoJogar());
 		this.estado_atual.Executar(banca);
 	}
@@ -151,27 +161,27 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	// RESULTADOS VIEW
 	
 	public void ganhouV() {
+		this.guiPrincipal.setEstado(this.getNome(), "GANHOU");
 		setCarteira(valorDaAposta * 1.5f);
 		System.out.println(getNome() + " Ganhou!! Seu saldo atual é " + getCarteira());
-		//popup ganhou
-		
+
 	}
 	
 	public void perdeuV() {
+		this.guiPrincipal.setEstado(this.getNome(), "PERDEU");
 		setCarteira(-valorDaAposta);
 		System.out.println(getNome() + " Perdeu!! Seu saldo atual é " + getCarteira());
-		//popup perdeu
 	}
 	
 	public void empatouV() {
+		this.guiPrincipal.setEstado(this.getNome(), "EMPATOU");
 		System.out.println(getNome() + " Empatou!! Seu saldo atual é " + getCarteira());
-		//popup empatou
 	}
 	
 	public void vinteEUmV() {
+		this.guiPrincipal.setEstado(this.getNome(), "BLACKJACK");
 		setCarteira(valorDaAposta * 2.5f);
 		System.out.println(getNome() + " Ganhou com 21!! Seu saldo atual é " + getCarteira());
-		//popup vinte e um 
 	}
 	
 	//ESTADOS SET

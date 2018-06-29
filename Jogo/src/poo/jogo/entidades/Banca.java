@@ -18,6 +18,8 @@ import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
+import poo.jogo.gui.GuiPrincipal;
+import poo.jogo.gui.GuiPrincipalInterface;
 
 public class Banca extends JogadorAbstract implements BancaInterface{
 	
@@ -27,7 +29,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	private ArrayList<JogadorInterface> jogadoresVinteEUm;
 	private ArrayList<JogadorInterface> jogadoresParou;
 	private ArrayList<JogadorInterface> jogadoresTodos;
-	
+	private GuiPrincipalInterface guiPrincipal;
 	
 
 	public Banca(String nome, float saldo) throws Exception {
@@ -80,7 +82,16 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		this.Estado_atualBanca.Executar(this);  //deve comecar em getBancaFazerApostas();
 	}
 
-	public void iniciarV() {
+	// VIEW GUI INIT
+	
+	public void iniciarV() { 
+		this.guiPrincipal = new GuiPrincipal();
+		Jogador.initJogadorGuiView(this.guiPrincipal);
+		
+		for(JogadorInterface jogador:this.jogadoresTodos) {
+			jogador.setEstado_atual(getVEstadoEsperar());
+		}
+		
 		setEstado_atualBanca(getVBancaFazerApostas());
 		this.Estado_atualBanca.Executar(this);  //deve comecar em getBancaFazerApostas();
 	}
@@ -158,30 +169,37 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	//ESTADOS VIEW
 	
 	protected EstadoJogador getVBancaFazerApostas() {
+		this.guiPrincipal.setEstado("BANCA","APOSTANDO");
 		return new VBancaFazerApostas();
 	}
 		
 	protected EstadoJogador getVEstadoEsperar() {
+		this.guiPrincipal.setEstado("BANCA","ESPERANDO");
 		return new VBancaEsperar();
 	}
 
 	protected EstadoJogador getVEstadoEstourou() {
+		this.guiPrincipal.setEstado("BANCA","ESTOUROU");
 		return new VBancaEstourou();
 	}
 	
 	protected EstadoJogador getVDistribuirCartas() {
+		this.guiPrincipal.setEstado("BANCA","DISTRIBUINDO CARTAS");
 		return new VBancaDistribuirCartas();
 	}
 	
 	protected EstadoJogador getVEstadoParar() {
+		this.guiPrincipal.setEstado("BANCA","PAROU");
 		return new VBancaParar();
 	}
 	
 	protected EstadoJogador getVEstadoVinteEUm() {
+		this.guiPrincipal.setEstado("BANCA","BLACKJACK");
 		return new VBancaVinteEUm();
 	}
 	
 	protected EstadoJogador getVEstadoJogar() {
+		this.guiPrincipal.setEstado("BANCA","JOGANDO");
 		return new VBancaJogar();
 	}
 

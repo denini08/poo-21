@@ -1,9 +1,6 @@
 package poo.jogo.gui;
 
-import java.util.ArrayList;
-
 import poo.jogo.entidades.Baralho;
-import poo.jogo.entidades.Carta;
 import poo.jogo.enums.CartaEnum;
 import poo.jogo.enums.NaipesEnum;
 
