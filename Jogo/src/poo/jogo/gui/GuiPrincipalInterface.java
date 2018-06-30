@@ -11,6 +11,8 @@ public interface GuiPrincipalInterface {
 	
 	public void setAposta(String nomeJogador, float valor);
 	
+	public void setPontos(String nomeJogador, int Pontos);
+	
 	public void setVisible(boolean bool);
 	
 }

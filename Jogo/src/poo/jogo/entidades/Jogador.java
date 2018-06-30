@@ -222,6 +222,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected EstadoJogador getVEstadoEstourou() {
+		this.guiPrincipal.setEstado(this.getNome(), "ESTOUROU");
 		return new VEstourou();
 	}
 	
@@ -230,15 +231,24 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	}
 	
 	protected EstadoJogador getVEstadoParar() {
+		this.guiPrincipal.setEstado(this.getNome(), "PAROU");
 		return new VParar();
 	}
 	
 	protected EstadoJogador getVEstadoVinteEUm() {
+		this.guiPrincipal.setEstado(this.getNome(), "BLACKJACK");
 		return new VVinteEUm();
 	}
 
+	//ENVIAR PARA GUI
 	
+	private void atualizarPontosNaGUI(int pontos) {
+		guiPrincipal.setPontos(this.getNome(), pontos);
+	}
 	
+	private void atualizarApostaNaGUI(float valor) {
+		guiPrincipal.setAposta(this.getNome(), valor);
+	}
 	
 	
 	//ESTADOS IMPLEMENTS
@@ -506,6 +516,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		public void Executar(BancaInterface banca) {
 			float valor = apostaPOPUP(getNome());
 			setValorAposta(valor);
+			atualizarApostaNaGUI(valor);
 			setEstado_atual(getVEstadoEsperar());
 		}
 	}
@@ -563,7 +574,8 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 				return;
 			}
 			if(VquerSolicitarCarta()) { // perguntar ao user se ele quer puxar
-				banca.pegarCarta(Jogador.this);
+				banca.pegarCarta(Jogador.this); ///VIEW PUSH PONTOS
+				atualizarPontosNaGUI(pontos());
 			} else {
 				setEstado_atual(getVEstadoParar());
 				return;

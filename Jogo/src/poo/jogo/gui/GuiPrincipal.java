@@ -92,7 +92,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 	
 
 	private void addBanca() {
-		this.inserirJogador("Banca", "ESPERANDO");
+		this.inserirJogador("BANCA", "ESPERANDO");
 		
 	}
 
@@ -146,7 +146,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		}
 		
 		if(index == null ) {
-			System.out.println("fudeo setAposta");
+			System.out.println("Index não encontrado - setAposta");
 			return;
 		}
 		
@@ -165,7 +165,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		}
 		
 		if(index == null ) {
-			System.out.println("fudeo setAposta");
+			System.out.println("Index não encontrado - setAposta");
 			return;
 		}
 		
@@ -174,11 +174,11 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		
 	}
 
-	public static void main (String[] args) {
-		GuiPrincipal janela = new GuiPrincipal(1);
-		janela.setVisible(true);
+	@Override
+	public void setPontos(String nomeJogador, int Pontos) {
+		// TODO Auto-generated method stub
 		
-		janela.inserirJogador("Denini", "Espearando");
 	}
+
 
 }
