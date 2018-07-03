@@ -1,6 +1,7 @@
 package poo.jogo.entidades.interf;
 
 import poo.jogo.entidades.estados.EstadoJogador;
+import poo.jogo.gui.VCard;
 
 public interface JogadorInterface extends JogadorAbstractInterface{
 	
@@ -37,4 +38,6 @@ public interface JogadorInterface extends JogadorAbstractInterface{
 	public void FazerApostaV(BancaInterface banca);
 	
 	public void jogarV(BancaInterface banca);
+
+	public VCard solicitarCartaV(BancaInterface banca);
 }

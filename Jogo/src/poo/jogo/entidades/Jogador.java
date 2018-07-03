@@ -574,7 +574,7 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 				return;
 			}
 			if(VquerSolicitarCarta()) { // perguntar ao user se ele quer puxar
-				banca.pegarCarta(Jogador.this); ///VIEW PUSH PONTOS
+				banca.pegarCartaV(Jogador.this); ///VIEW PUSH PONTOS
 				atualizarPontosNaGUI(pontos());
 			} else {
 				setEstado_atual(getVEstadoParar());

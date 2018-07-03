@@ -21,6 +21,8 @@ import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
 import poo.jogo.gui.GuiPrincipal;
 import poo.jogo.gui.GuiPrincipalInterface;
+import poo.jogo.gui.VBaralho;
+import poo.jogo.gui.VCard;
 
 public class Banca extends JogadorAbstract implements BancaInterface{
 	
@@ -89,6 +91,12 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		this.guiPrincipal = new GuiPrincipal(quant_jogadores);
 		Jogador.initJogadorGuiView(this.guiPrincipal);
 		
+		try {
+			this.baralho = new VBaralho(4);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		for(JogadorInterface jogador:this.jogadoresTodos) {
 			jogador.setEstado_atual(getVEstadoEsperar());
 			guiPrincipal.inserirJogador(jogador.getNome(), "ESPERAR");
@@ -96,6 +104,14 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		
 		setEstado_atualBanca(getVBancaFazerApostas());
 		this.Estado_atualBanca.Executar(this);  //deve comecar em getBancaFazerApostas();
+	}
+	
+	//COMUNICAÇÃO VIEW
+	
+	public void pegarCartaV(JogadorInterface jogador) {
+		//this.jogadoresQuerCarta.add(jogador);
+		VCard carta = jogador.solicitarCartaV(this);
+		guiPrincipal.inserirCartas(jogador.getNome(), carta);
 	}
 	
 	//COMUNICACAO
@@ -639,17 +655,18 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			System.out.println("Distribuindo cartas");
 			for (int j = 0; j < 2; j++) {
 				for (int i = 0; i < jogadoresTodos.size(); i++) {	//for pra pecorrer todos os jogadores
-					jogadoresTodos.get(i).solicitarCarta(banca);	//puxa a carta para o jogador
+					VCard carta = jogadoresTodos.get(i).solicitarCartaV(banca);	//puxa a carta para o jogador
 					System.out.println("\n " + jogadoresTodos.get(i).getNome() + " Tem: ");
 					jogadoresTodos.get(i).getMao().exibirCartas(); 
-					//AQUI COLOCAR AS CARTAS VIEW
+					
+					guiPrincipal.inserirCartas(jogadoresTodos.get(i).getNome(), carta);
 				}
 				banca.solicitarCarta(banca);	//puxa a  carta para a banca
 				
 			}
 			System.out.println("\n Banca Tem: ");
 			System.out.println("\t"+banca.getMao().getCartas().get(0).getNome()+" de " + banca.getMao().getCartas().get(0).getNaipe());
-			//AQUI COLOCAR AS CARTAS VIEW DA BANCA
+			guiPrincipal.inserirCartas("BANCA", (VCard) banca.getMao().getCartas().get(0));
 			
 			
 			System.out.println("\n ----FIM DA DISTRIBUIÇÃO DE CARTAS----\n\n");
@@ -778,6 +795,8 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		public void Executar(BancaInterface banca) {
 			int deQuantosEstouGanhando = 0;
 			
+			//ULTIMA CARTA ESCONDIDA
+			guiPrincipal.inserirCartas("BANCA", (VCard) banca.getMao().getCartas().get(1));
 			
 			for (int i = 0; i < jogadoresParou.size(); i++) {	//CHECAR SE TODOS ESTOURARAM
 				if (banca.pontos() > jogadoresParou.get(i).pontos()) {
@@ -790,12 +809,14 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 				
 			
 			}else if (deQuantosEstouGanhando == 0  && jogadoresVinteEUm.size() >= 0){		//SE A BANCA TIVER PERDENDO DE TODOS OS VIVOS
-				banca.solicitarCarta(banca);
+				VCard carta = banca.solicitarCartaV(banca);
+				guiPrincipal.inserirCartas("BANCA", carta);
 				maoAlterar();
 			
 				
 			}else if (banca.pontos() < 17) {
-				banca.solicitarCarta(banca);
+				VCard carta = banca.solicitarCartaV(banca);
+				guiPrincipal.inserirCartas("BANCA", carta);
 				maoAlterar();
 				
 				
@@ -838,5 +859,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			JOptionPane.showMessageDialog(null, "BlackJack('s) : \n" + res);
 		}
 	}
+
 
 }

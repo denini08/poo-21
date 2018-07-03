@@ -26,6 +26,7 @@ public class GuiInicial extends javax.swing.JFrame {
      */
     public GuiInicial() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**

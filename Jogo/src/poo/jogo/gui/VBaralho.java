@@ -21,7 +21,7 @@ public class VBaralho extends Baralho {
 			for (NaipesEnum j : NaipesEnum.values()) {	//for dos naipes do baralho
 				int numero = 1;
 				for (CartaEnum i : CartaEnum.values()) {	//for das cartas do naipe
-					cartaTemp = new VCard(i.name(), j.name(), "\\cartas_bmp\\" + letra[numeroLetra] + "0" + numero, "\\cartas_bmp_cut\\" + letra[numeroLetra] + "0" + numero);
+					cartaTemp = new VCard(i.name(), j.name(), "..\\cartas_bmp\\" + letra[numeroLetra] + "0" + numero + ".png", "..\\cartas_bmp_cortado\\" + letra[numeroLetra] + "0" + numero + ".png");
 					cartas.add(cartaTemp);	//e depois é adicionado no ArrayList
 					numero++;
 				}

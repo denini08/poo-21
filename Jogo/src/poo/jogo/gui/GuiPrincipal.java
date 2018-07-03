@@ -33,6 +33,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 			JPanel painelInfo = new JPanel();
 			this.paineisJogadores.add(painelTemp);
 			this.paineisInfoJogadores.add(painelInfo);
+			cartasMao.add(i, null);
 			
 		}
 		this.setTitle("Mesa");
@@ -43,6 +44,10 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		
 		
 		this.criarPaineis();
+		
+		//Cartas mao
+/*		CartasMao c = new CartasMao(null,null);
+		cartasMao.add(0, c);*/
 		}
 	
 	private void criarPaineis() {
@@ -62,10 +67,10 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 			JPanel painelJogador = this.paineisJogadores.get(i);
 			
 			
-			painelInfoJogador.add(new JLabel("Nome: "));  //nome getComponent(0)
-			painelInfoJogador.add(new JLabel("Estado: ")); //getComponent(1)
+			painelInfoJogador.add(new JLabel(""));  //nome getComponent(0)
+			painelInfoJogador.add(new JLabel("")); //Estado getComponent(1)
 			painelInfoJogador.add(new JLabel("$")); //aposta getComponent(2)
-			painelInfoJogador.add(new JLabel("Pontos: "));	//getComponent(3)
+			painelInfoJogador.add(new JLabel(""));	//Pontos getComponent(3)
 			
 			painelInfoJogador.setBackground(Color.PINK);
 			painelInfoJogador.setSize(WidthInfo, HeighInfo);
@@ -101,6 +106,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 
 	private void addBanca() {
 		this.inserirJogador("BANCA", "ESPERANDO");
+		JLabel label = (JLabel) this.paineisInfoJogadores.get(0).getComponent(2);
+		label.setText("");
 		
 	}
 
@@ -128,16 +135,21 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		JPanel painelJogador = this.paineisJogadores.get(index);		//add a carta nova
 		JLabel cartaNova = new JLabel();
 		cartaNova.setIcon(new ImageIcon(Carta.getImagem()));
+		System.out.println(Carta.getImagem());
 		painelJogador.add(cartaNova);
 		
+		
+		//CARTAS FICAR MENOR
 		try {
 			JLabel labelcartaMaior = cartasMao.get(index).getLabelMaior();
 			VCard cartaMaior = cartasMao.get(index).getUltimaCarta();
 			labelcartaMaior.setIcon(new ImageIcon(cartaMaior.getImagemCortada()));
+			System.out.println(cartaMaior.getImagemCortada() + "DENINI AQUI");
 		} catch (Exception e) {
-			System.out.println("entrou trycatch");
+		
+			System.out.println(index + "entrou trycatch");
 			CartasMao c = new CartasMao(Carta,cartaNova);
-			cartasMao.add(index, c);
+			cartasMao.set(index, c);
 			return;
 		}
 		
@@ -152,7 +164,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 	public void inserirJogador(String nomeJogador, String estadoJogador) {
 		this.jogadores.add(nomeJogador);
 		this.setEstado(nomeJogador, estadoJogador);
-		this.setAposta(nomeJogador, 1500);
+		this.setAposta(nomeJogador, 0);
 		this.setNomeJogador(nomeJogador);
 		
 	}
@@ -178,7 +190,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		}
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(1);
-		j.setText("Estado: " + estadoJogador);
+		j.setText(estadoJogador);
 	}
 
 	@Override
@@ -217,7 +229,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		}
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(0);
-		j.setText("Nome: " + nomeJogador);
+		j.setText(nomeJogador);
 		
 	}
 
@@ -238,11 +250,11 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		}
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(3);
-		j.setText("Pontos: " + Pontos);
+		j.setText("Pts: " + Pontos);
 		
 	}
 	
-	//teste papai NAO APAGAR
+/*	//teste papai NAO APAGAR
 	public static void main (String[] args) throws Exception {
 				GuiPrincipal janela = new GuiPrincipal(1);
 				janela.setVisible(true);
@@ -256,5 +268,5 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 				janela.inserirCartas("Denini", c);
 				janela.inserirCartas("Denini", d);
 				//janela.inserirCartas("Denini", d);
-			}
+			}*/
 }

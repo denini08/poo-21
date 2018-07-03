@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.MaoInterface;
+import poo.jogo.gui.VCard;
 import poo.jogo.persistencia.BD;
 import poo.jogo.persistencia.Persistencia;
 import poo.jogo.persistencia.interf.PersistenciaInterface;
@@ -47,6 +48,13 @@ public abstract class JogadorAbstract {
 	
 	public void solicitarCarta(BancaInterface banca) {
 		this.mao.receberCartas(banca.retirarCarta());
+	}
+	
+	public VCard solicitarCartaV(BancaInterface banca) { //MUDAR
+		VCard carta = (VCard) banca.retirarCarta();
+		this.mao.receberCartas(carta);
+		return carta;
+		
 	}
 	
 	public ArrayList<CartaInterface> getCartasDaMao(){
