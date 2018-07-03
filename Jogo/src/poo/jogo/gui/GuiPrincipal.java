@@ -1,10 +1,14 @@
 package poo.jogo.gui;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import poo.jogo.entidades.Carta;
 
 public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 	private static final long serialVersionUID = 1L;
@@ -12,11 +16,13 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 	private ArrayList<JPanel> paineisInfoJogadores;
 	private int quantidadeJogadores;
 	private ArrayList<String> jogadores;
-	
+	private ArrayList<CartasMao> cartasMao;
 	
 	
 	
 	public GuiPrincipal (int quant) {
+		cartasMao = new ArrayList<CartasMao>(this.quantidadeJogadores);
+		
 		this.quantidadeJogadores = quant + 1;
 		this.paineisJogadores = new ArrayList<JPanel>(this.quantidadeJogadores);
 		this.paineisInfoJogadores = new ArrayList<JPanel>(this.quantidadeJogadores);
@@ -27,6 +33,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 			JPanel painelInfo = new JPanel();
 			this.paineisJogadores.add(painelTemp);
 			this.paineisInfoJogadores.add(painelInfo);
+			
 		}
 		this.setTitle("Mesa");
 		this.setSize(1024, 860);
@@ -55,9 +62,10 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 			JPanel painelJogador = this.paineisJogadores.get(i);
 			
 			
-			painelInfoJogador.add(new JLabel("Nome: "));  //getComponent(0)
+			painelInfoJogador.add(new JLabel("Nome: "));  //nome getComponent(0)
 			painelInfoJogador.add(new JLabel("Estado: ")); //getComponent(1)
-			painelInfoJogador.add(new JLabel("Aposta: ")); //getComponent(2)
+			painelInfoJogador.add(new JLabel("$")); //aposta getComponent(2)
+			painelInfoJogador.add(new JLabel("Pontos: "));	//getComponent(3)
 			
 			painelInfoJogador.setBackground(Color.PINK);
 			painelInfoJogador.setSize(WidthInfo, HeighInfo);
@@ -98,7 +106,45 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 
 	@Override
 	public void inserirCartas(String nomeJogador, VCard Carta) {
-		// TODO Auto-generated method stub
+		Integer index  = null ;
+		
+		for(int i = 0 ; i < this.jogadores.size(); i++) {			//encontrando a posicao do jogador no array
+			if(this.jogadores.get(i).equals(nomeJogador)) {
+				index = i;
+				break;
+			}
+		}
+		
+		System.out.println(index + "  index");
+		
+		if(index == null ) {
+			System.out.println("Index não encontrado - inserirCartas " + nomeJogador);
+			return;
+		}
+		
+		
+		
+		
+		JPanel painelJogador = this.paineisJogadores.get(index);		//add a carta nova
+		JLabel cartaNova = new JLabel();
+		cartaNova.setIcon(new ImageIcon(Carta.getImagem()));
+		painelJogador.add(cartaNova);
+		
+		try {
+			JLabel labelcartaMaior = cartasMao.get(index).getLabelMaior();
+			VCard cartaMaior = cartasMao.get(index).getUltimaCarta();
+			labelcartaMaior.setIcon(new ImageIcon(cartaMaior.getImagemCortada()));
+		} catch (Exception e) {
+			System.out.println("entrou trycatch");
+			CartasMao c = new CartasMao(Carta,cartaNova);
+			cartasMao.add(index, c);
+			return;
+		}
+		
+		System.out.println(cartasMao.size());
+		cartasMao.get(index).setCarta(Carta, cartaNova);
+		
+		
 		
 	}
 
@@ -126,7 +172,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		System.out.println(index + "  index");
 		
 		if(index == null ) {
-			System.out.println("Index não encontrado - SetEstado");
+			System.out.println("Index não encontrado - SetEstado" + nomeJogador);
+			
 			return;
 		}
 		
@@ -151,7 +198,7 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		}
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(2);
-		j.setText("Valor Apostado:" + valor);
+		j.setText("$" + valor);
 	}
 	
 	public void setNomeJogador(String nomeJogador) {
@@ -176,9 +223,38 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 
 	@Override
 	public void setPontos(String nomeJogador, int Pontos) {
-		// TODO Auto-generated method stub
+		Integer index  = null ;
+		
+		for(int i = 0 ; i < this.jogadores.size(); i++) {			//encontrando a posicao do jogador no array
+			if(this.jogadores.get(i).equals(nomeJogador)) {
+				index = i;
+				break;
+			}
+		}
+		
+		if(index == null ) {
+			System.out.println("Index não encontrado - setPontos");
+			return;
+		}
+		
+		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(3);
+		j.setText("Pontos: " + Pontos);
 		
 	}
-
-
+	
+	//teste papai NAO APAGAR
+	public static void main (String[] args) throws Exception {
+				GuiPrincipal janela = new GuiPrincipal(1);
+				janela.setVisible(true);
+				VCard c = new VCard("AS", "OUROS", "C:\\Users\\Denini\\Desktop\\f2\\g\\poo-21\\cartas_bmp\\c01.png",
+						"C:\\Users\\Denini\\Desktop\\f2\\g\\poo-21\\cartas_bmp_cortado\\c01.png");
+				VCard d = new VCard("DOIS", "OUROS", "C:\\Users\\Denini\\Desktop\\f2\\g\\poo-21\\cartas_bmp\\c02.png",
+						"C:\\Users\\Denini\\Desktop\\f2\\g\\poo-21\\cartas_bmp_cortado\\c02.png");
+				janela.inserirJogador("Denini", "Espearando");
+				janela.inserirCartas("BANCA", d);
+				janela.inserirCartas("BANCA", c);
+				janela.inserirCartas("Denini", c);
+				janela.inserirCartas("Denini", d);
+				//janela.inserirCartas("Denini", d);
+			}
 }
