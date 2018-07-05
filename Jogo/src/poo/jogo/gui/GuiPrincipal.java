@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import poo.jogo.entidades.Carta;
@@ -271,6 +272,9 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 	}
 	
 	public void fechar() {
+		JLabel label = new JLabel("Criado por::::Denini Gabriel::::Geovanne Alves::::Thyago Oliveira::::Thomás Tabosa::::");
+		label.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 12));
+		JOptionPane.showMessageDialog(null, label, "BLACKJACK - UPE CARUARU", 0, new ImageIcon("..\\Imagem do Jogo\\icon1.png"));//(null, "\t\tBLACKJACK UPE\n\t\tCreate by\n::::Denini Gabriel::::\n::::Geovanne Alves::::\n::::Thyago Oliveira::::\n::::Thomás Tabosa::::");
 		this.dispose();
 	}
 /*	//teste papai NAO APAGAR

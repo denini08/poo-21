@@ -88,6 +88,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	// VIEW GUI INIT
 	
 	public void iniciarV(int quant_jogadores) { 
+		fecharBanco();
 		this.guiPrincipal = new GuiPrincipal(quant_jogadores);
 		Jogador.initJogadorGuiView(this.guiPrincipal);
 		

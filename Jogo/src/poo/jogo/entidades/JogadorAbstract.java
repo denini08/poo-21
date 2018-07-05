@@ -24,6 +24,12 @@ public abstract class JogadorAbstract {
 		this.bd = new Persistencia();
 	}
 	
+	//FECHAR BD
+	public void fecharBanco() {
+		this.bd.fecharBanco();
+	}
+	
+	
 	public String getNome() {
 		return this.nome;
 	}

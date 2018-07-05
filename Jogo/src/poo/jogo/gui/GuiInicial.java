@@ -233,6 +233,7 @@ public class GuiInicial extends javax.swing.JFrame {
                 banca.obterJogadores(new Jogador(lista[i].getText(), 1000));
                 
             }
+            this.dispose();
         	banca.iniciarV(cont);
         	this.dispose();
         	Object[] escolhas = {"SIM", "NÃO"};
