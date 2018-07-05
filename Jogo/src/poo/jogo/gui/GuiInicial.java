@@ -9,6 +9,11 @@ package poo.jogo.gui;
 
 import java.time.Clock;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import poo.jogo.entidades.Banca;
@@ -22,11 +27,15 @@ import poo.jogo.entidades.interf.BancaInterface;
 public class GuiInicial extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form guiInicial
      */
     public GuiInicial() {
+    	this.setExtendedState(MAXIMIZED_BOTH);
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -49,19 +58,31 @@ public class GuiInicial extends javax.swing.JFrame {
         textJogador6 = new javax.swing.JTextField();
         textJogador7 = new javax.swing.JTextField();
         jButtonJogar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1024, 860));
+
+
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(null);
 
-        lTitulo.setFont(new java.awt.Font("Cooper Black", 0, 48)); // NOI18N
+        lTitulo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 48)); // NOI18N
+        lTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lTitulo.setText("BlackJack - UPE Caruaru");
+        getContentPane().add(lTitulo);
+        lTitulo.setBounds(340, 90, 740, 114);
 
-        jLabel1.setFont(new java.awt.Font("Cooper Black", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Informe a quantidade de jogadores");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(350, 240, 284, 17);
 
         quantidadeJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
         quantidadeJogadores.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +90,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 quantidadeJogadoresActionPerformed(evt);
             }
         });
+        getContentPane().add(quantidadeJogadores);
+        quantidadeJogadores.setBounds(650, 240, 50, 30);
 
         textJogador2.setText("Jogador 2");
         textJogador2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -76,6 +99,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador2MouseClicked(evt);
             }
         });
+        getContentPane().add(textJogador2);
+        textJogador2.setBounds(360, 340, 360, 30);
 
         textJogador3.setText("Jogador 3");
         textJogador3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,6 +113,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador3ActionPerformed(evt);
             }
         });
+        getContentPane().add(textJogador3);
+        textJogador3.setBounds(360, 380, 360, 30);
 
         textJogador1.setText("Jogador 1");
         textJogador1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,6 +122,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador1MouseClicked(evt);
             }
         });
+        getContentPane().add(textJogador1);
+        textJogador1.setBounds(360, 300, 360, 30);
 
         textJogador4.setText("Jogador 4");
         textJogador4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,6 +131,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador4MouseClicked(evt);
             }
         });
+        getContentPane().add(textJogador4);
+        textJogador4.setBounds(360, 420, 360, 30);
 
         textJogador5.setText("Jogador 5");
         textJogador5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,6 +140,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador5MouseClicked(evt);
             }
         });
+        getContentPane().add(textJogador5);
+        textJogador5.setBounds(360, 460, 360, 30);
 
         textJogador6.setText("Jogador 6");
         textJogador6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,6 +149,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador6MouseClicked(evt);
             }
         });
+        getContentPane().add(textJogador6);
+        textJogador6.setBounds(360, 500, 360, 30);
 
         textJogador7.setText("Jogador 7");
         textJogador7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,6 +158,8 @@ public class GuiInicial extends javax.swing.JFrame {
                 textJogador7MouseClicked(evt);
             }
         });
+        getContentPane().add(textJogador7);
+        textJogador7.setBounds(360, 540, 360, 30);
 
         jButtonJogar.setFont(new java.awt.Font("Cooper Black", 0, 24)); // NOI18N
         jButtonJogar.setText("JOGAR!!!");
@@ -131,73 +168,23 @@ public class GuiInicial extends javax.swing.JFrame {
                 try {
 					jButtonJogarMouseClicked(evt);
 				} catch (Exception e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
-					//POPUP NOME IGUAL - RENICIA O JOGO
 				}
             }
         });
+        getContentPane().add(jButtonJogar);
+        jButtonJogar.setBounds(1020, 340, 180, 70);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(lTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(quantidadeJogadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textJogador1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textJogador4, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textJogador5, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textJogador6, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textJogador7, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonJogar)))))
-                        .addGap(33, 33, 33)))
-                .addContainerGap(148, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(quantidadeJogadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(textJogador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textJogador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonJogar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(textJogador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textJogador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textJogador5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textJogador6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textJogador7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon("..\\Imagem do Jogo\\table.jpg")); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(1024, 860));
+        jLabel2.setMinimumSize(new java.awt.Dimension(1024, 860));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1370, 860);
+        
+
+
+
 
         pack();
     }// </editor-fold>                        
@@ -235,19 +222,30 @@ public class GuiInicial extends javax.swing.JFrame {
     }                                         
 
     private void jButtonJogarMouseClicked(java.awt.event.MouseEvent evt) throws Exception { //CHAMA TUDOOOOOOOO - AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-    	BancaInterface banca = null;
-		banca = new Banca("BANCA", 5000);
-    	JTextField lista[] = {textJogador1,textJogador2,textJogador3,textJogador4,textJogador5,textJogador6,textJogador7};
-        int cont = this.quantidadeJogadores.getSelectedIndex() + 1;
-        String texto = "textJogador";
-        for (int i = 0; i < cont; i++){
-            System.out.println(lista[i].getText());
-            banca.obterJogadores(new Jogador(lista[i].getText(), 1000));
-            
+        while (true) {
+        	BancaInterface banca = null;
+    		banca = new Banca("BANCA", 5000);
+        	JTextField lista[] = {textJogador1,textJogador2,textJogador3,textJogador4,textJogador5,textJogador6,textJogador7};
+            int cont = this.quantidadeJogadores.getSelectedIndex() + 1;
+            String texto = "textJogador";
+            for (int i = 0; i < cont; i++){
+                System.out.println(lista[i].getText());
+                banca.obterJogadores(new Jogador(lista[i].getText(), 1000));
+                
+            }
+        	banca.iniciarV(cont);
+        	this.dispose();
+        	Object[] escolhas = {"SIM", "NÃO"};
+    		int index = JOptionPane.showOptionDialog(null,"Você deseja jogar novamente?", "Jogar novamente", 0, JOptionPane.QUESTION_MESSAGE, null, escolhas, 1);
+    		if (index == 1 || index == JOptionPane.CLOSED_OPTION) {
+    			break;
+    		}
+    		
         }
         
-        banca.iniciarV(cont);
-    }                                         
+        this.setVisible(true);
+        
+    }                                        
 
     private void quantidadeJogadoresActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         JTextField lista[] = {textJogador1,textJogador2,textJogador3,textJogador4,textJogador5,textJogador6,textJogador7};
@@ -306,6 +304,7 @@ public class GuiInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButtonJogar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lTitulo;
     private javax.swing.JComboBox<String> quantidadeJogadores;
     private javax.swing.JTextField textJogador1;

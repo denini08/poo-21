@@ -20,9 +20,9 @@ public class BD implements BDInterface {
 		
 	private BD() {
 		//MongoClientURI uri = new MongoClientURI("mongodb://datapoo21:datapoo21@host:port/db");
-		//MongoClientURI uri = new MongoClientURI("mongodb://datapoo21:datapoo21@ds241025.mlab.com:41025/jogo21");	
-		//mongoClient = new MongoClient(uri);
-		mongoClient = new MongoClient();
+		MongoClientURI uri = new MongoClientURI("mongodb://datapoo21:datapoo21@ds241025.mlab.com:41025/jogo21");	
+		mongoClient = new MongoClient(uri);
+		//mongoClient = new MongoClient();
 		Bd = mongoClient.getDatabase("jogo21");
 		colJogador = Bd.getCollection("jogo");
 	}

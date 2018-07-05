@@ -55,8 +55,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		int HeighInfo = 25;
 		int WidthPainel = 600;
 		int HeighPainel = 120;
-		int yPar = 0;
-		int yImpar = 0;
+		int yPar = 50;
+		int yImpar = 50;
 
 		
 		
@@ -72,9 +72,9 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 			painelInfoJogador.add(new JLabel("$")); //aposta getComponent(2)
 			painelInfoJogador.add(new JLabel(""));	//Pontos getComponent(3)
 			
-			painelInfoJogador.setBackground(Color.PINK);
+			painelInfoJogador.setBackground(new Color(169, 169, 169, 150));
 			painelInfoJogador.setSize(WidthInfo, HeighInfo);
-			painelJogador.setBackground(Color.BLUE);
+			painelJogador.setBackground(new Color(0, 0, 0, 150));
 			painelJogador.setSize(WidthPainel, HeighPainel);
 			if (i%2 == 0) {
 				painelInfoJogador.setBounds(30, yPar, WidthInfo, HeighInfo);
@@ -100,6 +100,10 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		this.addBanca();  //adicionando a banca junto com sua label
 		JPanel geral = new JPanel();
 		this.add(geral);
+		
+		JLabel imagem = new JLabel();
+		imagem.setIcon(new ImageIcon("..\\Imagem do Jogo\\table.jpg"));
+		geral.add(imagem);
 		
 	}
 	
@@ -138,6 +142,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		System.out.println(Carta.getImagem());
 		painelJogador.add(cartaNova);
 		
+		this.repaint();
+		
 		
 		//CARTAS FICAR MENOR
 		try {
@@ -167,6 +173,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		this.setAposta(nomeJogador, 0);
 		this.setNomeJogador(nomeJogador);
 		
+		this.repaint();
+		
 	}
 
 	@Override
@@ -191,6 +199,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(1);
 		j.setText(estadoJogador);
+		
+		this.repaint();
 	}
 
 	@Override
@@ -211,6 +221,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(2);
 		j.setText("$" + valor);
+		
+		this.repaint();
 	}
 	
 	public void setNomeJogador(String nomeJogador) {
@@ -230,6 +242,8 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(0);
 		j.setText(nomeJogador);
+		
+		this.repaint();
 		
 	}
 
@@ -252,8 +266,13 @@ public class GuiPrincipal extends JFrame implements GuiPrincipalInterface{
 		JLabel j = (JLabel) this.paineisInfoJogadores.get(index).getComponent(3);
 		j.setText("Pts: " + Pontos);
 		
+		this.repaint();
+		
 	}
 	
+	public void fechar() {
+		this.dispose();
+	}
 /*	//teste papai NAO APAGAR
 	public static void main (String[] args) throws Exception {
 				GuiPrincipal janela = new GuiPrincipal(1);

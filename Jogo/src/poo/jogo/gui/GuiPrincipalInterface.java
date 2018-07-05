@@ -15,4 +15,6 @@ public interface GuiPrincipalInterface {
 	
 	public void setVisible(boolean bool);
 	
+	public void fechar();
+	
 }

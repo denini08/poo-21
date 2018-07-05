@@ -634,6 +634,8 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			
 			POPUPResVenceu(viewGanhador);
 			POPUPResPerdeu(viewPrededor);
+			guiPrincipal.fechar();
+			//CHAMAR FUNÇÃO DE JOGAR DE NOVO
 		}
 
 	}
@@ -660,6 +662,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 					jogadoresTodos.get(i).getMao().exibirCartas(); 
 					
 					guiPrincipal.inserirCartas(jogadoresTodos.get(i).getNome(), carta);
+					guiPrincipal.setPontos(jogadoresTodos.get(i).getNome(), jogadoresTodos.get(i).getMao().getPontos());
 				}
 				banca.solicitarCarta(banca);	//puxa a  carta para a banca
 				
@@ -727,6 +730,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			POPUPResEmpatar(viewEmpatou);
 			POPUPResPerdeu(viewPerdedor);
 			POPUPResVenceu(viewGanhador);
+			guiPrincipal.fechar();
 		}
 		
 	}
@@ -751,7 +755,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			
 			POPUPResEmpatar(viewEmpatou);
 			POPUPResPerdeu(viewPerdedor);
-			
+			guiPrincipal.fechar();
 		}
 	}
 
