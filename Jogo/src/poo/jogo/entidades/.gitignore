@@ -17,3 +17,19 @@
 /Banca$BancaFazerApostas.class
 /Banca$BancaJogar.class
 /Jogador$Apostando.class
+<<<<<<< HEAD
+=======
+/Jogador$VApostando.class
+/Jogador$VEstourou.class
+/Jogador$VJogar.class
+/Jogador$VVinteEUm.class
+/Jogador$VEsperar.class
+/Jogador$VParar.class
+/Banca$VBancaDistribuirCartas.class
+/Banca$VBancaEsperar.class
+/Banca$VBancaEstourou.class
+/Banca$VBancaFazerApostas.class
+/Banca$VBancaJogar.class
+/Banca$VBancaParar.class
+/Banca$VBancaVinteEUm.class
+>>>>>>> gui

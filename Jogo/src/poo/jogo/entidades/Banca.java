@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import javax.print.attribute.standard.JobOriginatingUserName;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /*import poo.jogo.entidades.Jogador.Esperar;
 import poo.jogo.entidades.Jogador.Estourou;
@@ -17,6 +19,10 @@ import poo.jogo.entidades.interf.BancaInterface;
 import poo.jogo.entidades.interf.BaralhoInterface;
 import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
+import poo.jogo.gui.GuiPrincipal;
+import poo.jogo.gui.GuiPrincipalInterface;
+import poo.jogo.gui.VBaralho;
+import poo.jogo.gui.VCard;
 
 public class Banca extends JogadorAbstract implements BancaInterface{
 	
@@ -26,7 +32,7 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	private ArrayList<JogadorInterface> jogadoresVinteEUm;
 	private ArrayList<JogadorInterface> jogadoresParou;
 	private ArrayList<JogadorInterface> jogadoresTodos;
-	
+	private GuiPrincipalInterface guiPrincipal;
 	
 
 	public Banca(String nome, float saldo) throws Exception {
@@ -72,10 +78,41 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 			}
 		}
 		this.jogadoresTodos.add(jogador);
+		System.out.println(jogador.getNome());
 	}
 	
 	public void iniciar() {
 		this.Estado_atualBanca.Executar(this);  //deve comecar em getBancaFazerApostas();
+	}
+
+	// VIEW GUI INIT
+	
+	public void iniciarV(int quant_jogadores) { 
+		fecharBanco();
+		this.guiPrincipal = new GuiPrincipal(quant_jogadores);
+		Jogador.initJogadorGuiView(this.guiPrincipal);
+		
+		try {
+			this.baralho = new VBaralho(4);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for(JogadorInterface jogador:this.jogadoresTodos) {
+			jogador.setEstado_atual(getVEstadoEsperar());
+			guiPrincipal.inserirJogador(jogador.getNome(), "ESPERAR");
+		}
+		
+		setEstado_atualBanca(getVBancaFazerApostas());
+		this.Estado_atualBanca.Executar(this);  //deve comecar em getBancaFazerApostas();
+	}
+	
+	//COMUNICAÇÃO VIEW
+	
+	public void pegarCartaV(JogadorInterface jogador) {
+		//this.jogadoresQuerCarta.add(jogador);
+		VCard carta = jogador.solicitarCartaV(this);
+		guiPrincipal.inserirCartas(jogador.getNome(), carta);
 	}
 	
 	//COMUNICACAO
@@ -108,12 +145,6 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	
 	
 	
-	
-	//ESTADOS SET
-	protected EstadoJogador getBancaFazerApostas() {
-		return new BancaFazerApostas();
-	}
-	
 	private void setEstado_atualBanca(EstadoJogador estado) {
 		this.Estado_atualBanca = estado;
 	}
@@ -122,10 +153,17 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		return this.Estado_atualBanca;
 	}
 	
+	
+	
+	//ESTADOS SET
+	
+	protected EstadoJogador getBancaFazerApostas() {
+		return new BancaFazerApostas();
+	}
+		
 	protected EstadoJogador getEstadoEsperar() {
 		return new BancaEsperar();
 	}
-	
 
 	protected EstadoJogador getEstadoEstourou() {
 		return new BancaEstourou();
@@ -146,11 +184,50 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 	protected EstadoJogador getEstadoJogar() {
 		return new BancaJogar(); //é pra usar o de jogador! SDS! IA DA BANCA
 	}
+	
+	//ESTADOS VIEW
+	
+	protected EstadoJogador getVBancaFazerApostas() {
+		this.guiPrincipal.setEstado("BANCA","APOSTANDO");
+		this.guiPrincipal.setVisible(true);
+		return new VBancaFazerApostas();
+	}
+		
+	protected EstadoJogador getVEstadoEsperar() {
+		this.guiPrincipal.setEstado("BANCA","ESPERANDO");
+		return new VBancaEsperar();
+	}
+
+	protected EstadoJogador getVEstadoEstourou() {
+		this.guiPrincipal.setEstado("BANCA","ESTOUROU");
+		return new VBancaEstourou();
+	}
+	
+	protected EstadoJogador getVDistribuirCartas() {
+		this.guiPrincipal.setEstado("BANCA","DISTRIBUINDO CARTAS");
+		return new VBancaDistribuirCartas();
+	}
+	
+	protected EstadoJogador getVEstadoParar() {
+		this.guiPrincipal.setEstado("BANCA","PAROU");
+		return new VBancaParar();
+	}
+	
+	protected EstadoJogador getVEstadoVinteEUm() {
+		this.guiPrincipal.setEstado("BANCA","BLACKJACK");
+		return new VBancaVinteEUm();
+	}
+	
+	protected EstadoJogador getVEstadoJogar() {
+		this.guiPrincipal.setEstado("BANCA","JOGANDO");
+		return new VBancaJogar();
+	}
 
 	
 	
 	
 	//ESTADOS IMPLEMENTS
+	
 	private class BancaJogar implements EstadoJogador{  //IA DA BANCA!!!
 
 
@@ -513,6 +590,280 @@ public class Banca extends JogadorAbstract implements BancaInterface{
 		
 	}
 	
+	//VIEW ESTADOS
 	
+	private class VBancaEsperar extends BancaEsperar{
+		
+		public void Executar(BancaInterface banca) {
+			for (JogadorInterface jogador:jogadoresTodos) {
+				jogador.getEstado_atual().Executar(banca);
+			}
+			setEstado_atualBanca(getVEstadoJogar());		//vai para ia da banca
+			getEstado_atualBanca().Executar(banca);
+		}
+	}
+
+	private class VBancaEstourou extends BancaEstourou{
+		
+		public void Executar(BancaInterface banca) {
+			
+			String viewGanhador = "";
+			String viewPrededor = "";
+			Iterator<JogadorInterface> i = jogadoresParou.iterator();
+			
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				jogador.ganhouV();
+				viewGanhador += "\t" + jogador.getNome() + "\n";
+			}
+			
+			i = jogadoresVinteEUm.iterator();
+			
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				jogador.ganhouV();
+				viewGanhador += "\t" + jogador.getNome() + "\n";
+			}
+			
+			i = jogadoresEstourou.iterator();
+			
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				jogador.perdeuV();
+				viewPrededor += "\t" + jogador.getNome() + "\n";
+			}
+			
+			POPUPResVenceu(viewGanhador);
+			POPUPResPerdeu(viewPrededor);
+			guiPrincipal.fechar();
+			//CHAMAR FUNÇÃO DE JOGAR DE NOVO
+		}
+
+	}
+
+	private class VBancaDistribuirCartas extends BancaDistribuirCartas{
+		
+		public void maoJogavel() {
+			
+			setEstado_atualBanca(getVEstadoEsperar());
+			
+		}
+
+		public void maoVinteEUm() {
+			setEstado_atualBanca(getVEstadoVinteEUm());
+		}
+		
+		public void Executar(BancaInterface banca) {
+			//DISTRIBUIR
+			System.out.println("Distribuindo cartas");
+			for (int j = 0; j < 2; j++) {
+				for (int i = 0; i < jogadoresTodos.size(); i++) {	//for pra pecorrer todos os jogadores
+					VCard carta = jogadoresTodos.get(i).solicitarCartaV(banca);	//puxa a carta para o jogador
+					System.out.println("\n " + jogadoresTodos.get(i).getNome() + " Tem: ");
+					jogadoresTodos.get(i).getMao().exibirCartas(); 
+					
+					guiPrincipal.inserirCartas(jogadoresTodos.get(i).getNome(), carta);
+					guiPrincipal.setPontos(jogadoresTodos.get(i).getNome(), jogadoresTodos.get(i).getMao().getPontos());
+				}
+				banca.solicitarCarta(banca);	//puxa a  carta para a banca
+				
+			}
+			System.out.println("\n Banca Tem: ");
+			System.out.println("\t"+banca.getMao().getCartas().get(0).getNome()+" de " + banca.getMao().getCartas().get(0).getNaipe());
+			guiPrincipal.inserirCartas("BANCA", (VCard) banca.getMao().getCartas().get(0));
+			
+			
+			System.out.println("\n ----FIM DA DISTRIBUIÇÃO DE CARTAS----\n\n");
+			if(banca.pontos() == 21) {
+				maoVinteEUm();
+			}else {
+				maoJogavel();
+				for (int i = 0; i < jogadoresTodos.size(); i++){
+					jogadoresTodos.get(i).jogarV(banca);
+				}
+			}
+			getEstado_atual().Executar(banca);
+			
+		}
+	}
+
+	private class VBancaParar extends BancaParar{
+		
+		public void Executar(BancaInterface banca) {
+			String viewPerdedor = "";
+			String viewEmpatou = "";
+			String viewGanhador = "";
+			String viewBlackJack = "";
+			
+			Iterator<JogadorInterface> i = jogadoresParou.iterator();
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				if(jogador.getMao().getPontos() == banca.getMao().getPontos()) {
+					jogador.empatouV();
+					viewEmpatou += "\t" + jogador.getNome() + "\n";
+				} else if(jogador.getMao().getPontos() > banca.getMao().getPontos()) {
+					jogador.ganhouV();
+					viewGanhador += "\t" + jogador.getNome() + "\n";
+				} else {
+					jogador.perdeuV();
+					viewPerdedor += "\t" + jogador.getNome() + "\n";
+				}
+				System.out.println(jogador.getMao().getPontos());
+			}
+			
+			i = jogadoresVinteEUm.iterator();
+			
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				jogador.ganhouV();
+				viewGanhador += "\t" + jogador.getNome() + "\n";
+			}
+			
+			i = jogadoresEstourou.iterator();
+			
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				jogador.perdeuV();
+				viewPerdedor += "\t" + jogador.getNome() + "\n";
+			}
+			
+			POPUPResBlackjack(viewBlackJack);
+			POPUPResEmpatar(viewEmpatou);
+			POPUPResPerdeu(viewPerdedor);
+			POPUPResVenceu(viewGanhador);
+			guiPrincipal.fechar();
+		}
+		
+	}
+
+	private class VBancaVinteEUm extends BancaVinteEUm{
+		
+		public void Executar(BancaInterface banca) {
+
+			Iterator<JogadorInterface> i = jogadoresTodos.iterator();
+			String viewPerdedor = "";
+			String viewEmpatou = "";
+			while(i.hasNext()) {
+				JogadorInterface jogador = (JogadorInterface) i.next();
+				if(jogador.getMao().getPontos() == 21) {
+					jogador.empatouV();
+					viewEmpatou += "\t" + jogador.getNome() + "\n";
+				}else {
+					jogador.perdeuV();
+					viewPerdedor += "\t" + jogador.getNome() + "\n";
+				}
+			}
+			
+			POPUPResEmpatar(viewEmpatou);
+			POPUPResPerdeu(viewPerdedor);
+			guiPrincipal.fechar();
+		}
+	}
+
+	private class VBancaFazerApostas extends BancaFazerApostas{
+		
+		public void Executar(BancaInterface banca) {
+			for(int i = 0 ; i < jogadoresTodos.size(); ++i) {
+				jogadoresTodos.get(i).FazerApostaV(banca);
+			}
+			setEstado_atualBanca(getVDistribuirCartas());
+			getEstado_atualBanca().Executar(banca);
+			
+		}
+	}
+
+	private class VBancaJogar extends BancaJogar{
+		
+		public void maoVinteEUm() {
+			JOptionPane.showMessageDialog(null, "BANCA fez BlackJack");
+			setEstado_atualBanca(getVEstadoVinteEUm());
+			
+		}
+
+		
+		public void maoEstorou() {
+			JOptionPane.showMessageDialog(null, " Banca Estourou");
+			setEstado_atualBanca(getVEstadoEstourou());
+		}
+
+		
+		public void maoAlterar() {
+			if(estorou()) {
+				maoEstorou();
+			}else if(pontos() == 21) {
+				maoVinteEUm();
+			}
+			
+		}
+
+		
+		public void Executar(BancaInterface banca) {
+			int deQuantosEstouGanhando = 0;
+			
+			//ULTIMA CARTA ESCONDIDA
+			guiPrincipal.inserirCartas("BANCA", (VCard) banca.getMao().getCartas().get(1));
+			
+			for (int i = 0; i < jogadoresParou.size(); i++) {	//CHECAR SE TODOS ESTOURARAM
+				if (banca.pontos() > jogadoresParou.get(i).pontos()) {
+					deQuantosEstouGanhando++;
+				}
+			}
+			
+			if(deQuantosEstouGanhando == jogadoresParou.size() && jogadoresVinteEUm.size() == 0){	//SE A BANCA TIVER GANHANDO DE TODOS
+				setEstado_atualBanca(getVEstadoParar());
+				
+			
+			}else if (deQuantosEstouGanhando == 0  && jogadoresVinteEUm.size() >= 0){		//SE A BANCA TIVER PERDENDO DE TODOS OS VIVOS
+				VCard carta = banca.solicitarCartaV(banca);
+				guiPrincipal.inserirCartas("BANCA", carta);
+				maoAlterar();
+			
+				
+			}else if (banca.pontos() < 17) {
+				VCard carta = banca.solicitarCartaV(banca);
+				guiPrincipal.inserirCartas("BANCA", carta);
+				maoAlterar();
+				
+				
+			}else {
+				setEstado_atualBanca(getVEstadoParar());
+			}
+			System.out.println("\n Banca Tem: ");
+			//SET CARTAS PARA GUI TODO
+			getMao().exibirCartas();
+			
+			
+			getEstado_atualBanca().Executar(banca);
+		}
+	}
+	
+	private void POPUPResPerdeu(String res) {
+		if(!res.isEmpty()){
+	
+			JOptionPane.showMessageDialog(null, "Perdedor(es) : \n" + res);
+		}
+	}
+	
+	private void POPUPResVenceu(String res) {
+		if(!res.isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Ganhador(es) : \n" + res);
+		}
+	}
+	
+	private void POPUPResEmpatar(String res) {
+		if(!res.isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Empatar : \n" + res);
+		}
+	}
+	
+	private void POPUPResBlackjack(String res) {
+		if(!res.isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "BlackJack('s) : \n" + res);
+		}
+	}
+
 
 }

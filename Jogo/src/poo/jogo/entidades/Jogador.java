@@ -1,19 +1,19 @@
 package poo.jogo.entidades;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
-
+import javax.swing.JOptionPane;
 import poo.jogo.entidades.estados.EstadoJogador;
 import poo.jogo.entidades.interf.BancaInterface;
-import poo.jogo.entidades.interf.CartaInterface;
 import poo.jogo.entidades.interf.JogadorInterface;
+import poo.jogo.gui.GuiPrincipalInterface;
 
 public class Jogador extends JogadorAbstract implements JogadorInterface {
 	
 	private float valorDaAposta;
 	private EstadoJogador estado_atual;
+	private static GuiPrincipalInterface guiPrincipal;
+	
 
 	public Jogador(String nome, float saldo) {
 		super(nome, saldo);
@@ -24,6 +24,13 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	protected void setValorAposta(float valor) {
 		this.valorDaAposta = valor;
 	}
+	
+	public static void initJogadorGuiView(GuiPrincipalInterface guiPrincipal_) {
+		guiPrincipal = guiPrincipal_;
+	}
+	
+	
+	//COMANDLINE
 	
 	protected boolean querSolicitarCarta() {
 		Scanner scan = new Scanner(System.in);
@@ -42,6 +49,39 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 			}
 		}
 		//scan.close();
+	}
+	
+	
+	//SOLICITAÇÃO VIA POPUP
+	
+	private String solicitarPOPUP(String nome) {
+		String[] valor = {"pega","para"};
+		return valor[slaveSolicitarPOPUP(nome)];
+	}
+	
+	private int slaveSolicitarPOPUP(String nome) {
+		Object[] escolhas = {"PEGAR", "PARAR"};
+		int index = JOptionPane.showOptionDialog(null, nome + " , você deseja pegar ou puxar?", "Jogar", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
+		if(index == JOptionPane.CLOSED_OPTION) {
+			System.out.println("fechou miseravel");
+			index = slaveSolicitarPOPUP(nome);
+		}
+		return index;
+	}
+	
+	protected boolean VquerSolicitarCarta() {
+		while(true){
+			System.out.println("pega ou para?");
+			
+			String escolha = this.solicitarPOPUP(getNome()); // HIT BUTTON
+			
+			if (escolha.equals("pega") || escolha.equals("s")) {
+				return true;
+			}
+			if (escolha.equals("para") || escolha.equals("n")) {
+				return false;
+			}
+		}
 	}
 	
 	protected void detalhamentoMao() {
@@ -81,6 +121,20 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		return this.estado_atual;
 	}
 	
+	//ITERAÇÃO DE ESTADOS - VIEW
+	
+	public void FazerApostaV(BancaInterface banca) {
+		this.guiPrincipal.setEstado(this.getNome(), "APOSTANDO");
+		setEstado_atual(getVEstadoApostando());		//ESTADO APOSTANDO
+		this.estado_atual.Executar(banca);
+	}
+	
+	public void jogarV(BancaInterface banca) {
+		this.guiPrincipal.setEstado(this.getNome(), "JOGANDO");
+		this.setEstado_atual(getVEstadoJogar());
+		this.estado_atual.Executar(banca);
+	}
+	
 	
 	//RESULTADOS
 	
@@ -104,6 +158,31 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		System.out.println(getNome() + " Ganhou com 21!! Seu saldo atual é " + getCarteira());
 	}
 	
+	// RESULTADOS VIEW
+	
+	public void ganhouV() {
+		this.guiPrincipal.setEstado(this.getNome(), "GANHOU");
+		setCarteira(valorDaAposta * 1.5f);
+		System.out.println(getNome() + " Ganhou!! Seu saldo atual é " + getCarteira());
+
+	}
+	
+	public void perdeuV() {
+		this.guiPrincipal.setEstado(this.getNome(), "PERDEU");
+		setCarteira(-valorDaAposta);
+		System.out.println(getNome() + " Perdeu!! Seu saldo atual é " + getCarteira());
+	}
+	
+	public void empatouV() {
+		this.guiPrincipal.setEstado(this.getNome(), "EMPATOU");
+		System.out.println(getNome() + " Empatou!! Seu saldo atual é " + getCarteira());
+	}
+	
+	public void vinteEUmV() {
+		this.guiPrincipal.setEstado(this.getNome(), "BLACKJACK");
+		setCarteira(valorDaAposta * 2.5f);
+		System.out.println(getNome() + " Ganhou com 21!! Seu saldo atual é " + getCarteira());
+	}
 	
 	//ESTADOS SET
 	
@@ -130,9 +209,46 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 	protected EstadoJogador getEstadoVinteEUm() {
 		return new VinteEUm();
 	}
+	
+	
+	//ESTADOS SET VIEW
+	
+	protected EstadoJogador getVEstadoApostando() {
+		return new VApostando();
+	}
+	
+	protected EstadoJogador getVEstadoEsperar() {
+		return new VEsperar();
+	}
+	
+	protected EstadoJogador getVEstadoEstourou() {
+		this.guiPrincipal.setEstado(this.getNome(), "ESTOUROU");
+		return new VEstourou();
+	}
+	
+	protected EstadoJogador getVEstadoJogar() {
+		return new VJogar();
+	}
+	
+	protected EstadoJogador getVEstadoParar() {
+		this.guiPrincipal.setEstado(this.getNome(), "PAROU");
+		return new VParar();
+	}
+	
+	protected EstadoJogador getVEstadoVinteEUm() {
+		this.guiPrincipal.setEstado(this.getNome(), "BLACKJACK");
+		return new VVinteEUm();
+	}
 
+	//ENVIAR PARA GUI
 	
+	private void atualizarPontosNaGUI(int pontos) {
+		guiPrincipal.setPontos(this.getNome(), pontos);
+	}
 	
+	private void atualizarApostaNaGUI(float valor) {
+		guiPrincipal.setAposta(this.getNome(), valor);
+	}
 	
 	
 	//ESTADOS IMPLEMENTS
@@ -332,7 +448,6 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 
 		@Override
 		public void maoJogavel() {
-			// TODO Auto-generated method stub
 			
 		}
 
@@ -376,4 +491,114 @@ public class Jogador extends JogadorAbstract implements JogadorInterface {
 		}
 		
 	}
+	
+	
+	//VIEW  ESTADOS IMPLEMENT
+
+	private class VApostando extends Apostando {		
+		
+		private float apostaPOPUP(String nome) {
+			float[] valor = {10,50,100};
+			return valor[slaveApostaPOPUP(nome)];
+		}
+		
+		private int slaveApostaPOPUP(String nome) {
+			Object[] escolhas = {"$10", "$50", "$100"};
+			int index = JOptionPane.showOptionDialog(null, nome + " Escolha sua aposta", "Aposta", 0, JOptionPane.INFORMATION_MESSAGE, null, escolhas, 0);
+			
+			if(index == JOptionPane.CLOSED_OPTION) {
+				System.out.println("fechou miseravel");
+				index = slaveApostaPOPUP(nome);
+			}
+			return index;
+		}
+		
+		public void Executar(BancaInterface banca) {
+			float valor = apostaPOPUP(getNome());
+			setValorAposta(valor);
+			atualizarApostaNaGUI(valor);
+			setEstado_atual(getVEstadoEsperar());
+		}
+	}
+	
+	private class VEstourou extends Estourou{
+		
+		public void Executar(BancaInterface banca) {
+			super.Executar(banca);
+		}
+	}
+	
+	private class VEsperar extends Esperar{
+		
+		public void maoJogavel() {
+			setEstado_atual(getVEstadoJogar());
+		}
+		
+		public void maoVinteEUm() {
+			setEstado_atual(getVEstadoVinteEUm());
+		}
+		
+		
+		
+	}
+	
+	private class VJogar extends Jogar{
+		
+		
+		public void maoVinteEUm() {
+			JOptionPane.showMessageDialog(null, getNome() + " BlackJack");
+			setEstado_atual(getVEstadoVinteEUm());
+			
+		}
+
+		public void maoEstorou() {
+			JOptionPane.showMessageDialog(null, getNome() + " Estourou");
+			setEstado_atual(getVEstadoEstourou());
+			
+		}
+		
+		public void maoAlterar() {
+			if(estorou()) {
+				System.out.println("Você estorou");
+				maoEstorou();
+			} else if (pontos() == 21 ) {
+				System.out.println("Você fez um BlackJack!!!");
+				maoVinteEUm();
+			}
+		}
+		
+		public void Executar(BancaInterface banca) {
+			detalhamentoMao();
+			maoAlterar();
+			if (!(getEstado_atual() instanceof Jogar)) {
+				return;
+			}
+			if(VquerSolicitarCarta()) { // perguntar ao user se ele quer puxar
+				banca.pegarCartaV(Jogador.this); ///VIEW PUSH PONTOS
+				atualizarPontosNaGUI(pontos());
+			} else {
+				setEstado_atual(getVEstadoParar());
+				return;
+			}
+			estado_atual.Executar(banca);
+		}
+	
+	}
+	
+	private class VParar extends Parar{
+		
+		public void Executar(BancaInterface banca) {
+			super.Executar(banca);
+		}
+		
+	}
+	
+	private class VVinteEUm extends VinteEUm{
+		public void Executar(BancaInterface banca) {
+			super.Executar(banca);
+			
+		}
+		
+		}
+
 }

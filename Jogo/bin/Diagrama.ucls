@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="poo.jogo.entidades.Banca.BancaVinteEUm" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="4466" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="poo.jogo.entidades.interf.CartaInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/interf/CartaInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="138" x="4087" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="poo.jogo.entidades.interf.MaoInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/interf/MaoInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="210" x="5281" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="poo.jogo.entidades.Carta" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Carta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="138" x="3918" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="poo.jogo.persistencia.interf.BDInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/persistencia/interf/BDInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="273" x="7791" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="poo.jogo.entidades.Jogador.Jogar" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="6231" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="7" language="java" name="poo.jogo.enums.CartaEnum" project="Jogo" 
+    file="/Jogo/src/poo/jogo/enums/CartaEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="369" width="127" x="3577" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="8" language="java" name="poo.jogo.entidades.Banca.BancaJogar" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="4680" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="poo.jogo.entidades.Baralho" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Baralho.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="161" x="4265" y="2040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="poo.jogo.entidades.Banca.BancaFazerApostas" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="4894" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="poo.jogo.negocio.Negocio" project="Jogo" 
+    file="/Jogo/src/poo/jogo/negocio/Negocio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="248" x="6984" y="2040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="poo.jogo.entidades.Jogador.Esperar" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="6445" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="poo.jogo.persistencia.interf.PersistenciaInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/persistencia/interf/PersistenciaInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="196" x="6947" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="poo.jogo.entidades.JogadorAbstract" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/JogadorAbstract.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="243" x="6096" y="2040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="poo.jogo.entidades.Banca" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="237" x="5750" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="poo.jogo.persistencia.Persistencia" project="Jogo" 
+    file="/Jogo/src/poo/jogo/persistencia/Persistencia.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="196" x="7504" y="2040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="poo.jogo.entidades.Banca.BancaParar" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="5108" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="poo.jogo.entidades.estados.MetodosMao" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/estados/MetodosMao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="124" x="3923" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="19" language="java" name="poo.jogo.entidades.interf.BaralhoInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/interf/BaralhoInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="161" x="4265" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="20" language="java" name="poo.jogo.entidades.estados.EstadoJogador" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/estados/EstadoJogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="174" x="5945" y="3231"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="21" language="java" name="poo.jogo.entidades.Jogador.VinteEUm" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="6659" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="22" language="java" name="poo.jogo.entidades.interf.JogadorInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/interf/JogadorInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="206" x="5985" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="23" language="java" name="poo.jogo.negocio.Main2" project="Jogo" 
+    file="/Jogo/src/poo/jogo/negocio/Main2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="3844" y="2040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="poo.jogo.entidades.interf.BancaInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/interf/BancaInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="215" x="7536" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="poo.jogo.entidades.Banca.BancaDistribuirCartas" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="5322" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="poo.jogo.entidades.Jogador.Estourou" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="6873" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="poo.jogo.entidades.Jogador.Apostando" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="7087" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="poo.jogo.entidades.Banca.BancaEstourou" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="5536" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="poo.jogo.entidades.Jogador" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="210" x="6409" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="30" language="java" name="poo.jogo.negocio.interf.NegocioInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/negocio/interf/NegocioInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="248" x="6659" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="31" language="java" name="poo.jogo.entidades.Banca.BancaEsperar" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Banca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="5750" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="poo.jogo.entidades.Jogador.Parar" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Jogador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="174" x="7301" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="33" language="java" name="poo.jogo.enums.NaipesEnum" project="Jogo" 
+    file="/Jogo/src/poo/jogo/enums/NaipesEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="139" x="3744" y="2822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="34" language="java" name="poo.jogo.entidades.Mao" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/Mao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="210" x="4466" y="2040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="35" language="java" name="poo.jogo.entidades.interf.JogadorAbstractInterface" project="Jogo" 
+    file="/Jogo/src/poo/jogo/entidades/interf/JogadorAbstractInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="243" x="7204" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="36" language="java" name="poo.jogo.persistencia.BD" project="Jogo" 
+    file="/Jogo/src/poo/jogo/persistencia/BD.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="273" x="7487" y="2341"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="37">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="38" name="jogadoresTodos"/>      
+      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="40">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="27"/>  
+  </nesting>  
+  <association id="41">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="42" name="baralho"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="44">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="45">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="46">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="47" name="instancia"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="7505" y="2822"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="50" name="estado_atual"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="52">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="53">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="54">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="55">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="56">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="57" name="naipe"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <association id="60">    
+    <bendpoint x="7173" y="2341"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="61" name="jogadores"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="64" name="cartas"/>      
+      <multiplicity id="65" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="66">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="67">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="68">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="31"/>  
+  </nesting>  
+  <nesting id="69">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <association id="70">    
+    <bendpoint x="4295" y="2341"/>    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="71" name="cartas"/>      
+      <multiplicity id="72" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="74" name="jogadoresEstourou"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <realization id="77">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <realization id="78">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="79">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <nesting id="81">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="32"/>  
+  </nesting>  
+  <association id="82">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="83" name="nome"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="85">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="86">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="87" name="mao"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="90" name="jogadoresParou"/>      
+      <multiplicity id="91" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="92">    
+    <bendpoint x="4274" y="2341"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <association id="93">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="94" name="bd"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="97" name="bd"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="99">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <nesting id="100">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="21"/>  
+  </nesting>  
+  <nesting id="101">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <association id="102">    
+    <bendpoint x="5954" y="2822"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="103" name="Estado_atualBanca"/>      
+      <multiplicity id="104" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="105">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="106">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="28"/>  
+  </nesting>  
+  <realization id="107">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="108">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <nesting id="109">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <generalization id="111">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="112">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="113" name="bd"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="115">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <realization id="116">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="117">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <realization id="118">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="119">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <realization id="120">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="121">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="25"/>  
+  </nesting>  
+  <association id="122">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="123" name="jogadoresVinteEUm"/>      
+      <multiplicity id="124" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <bendpoint x="7800" y="2341"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="126" name="bdInter"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="128">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="129">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
